@@ -8,4 +8,9 @@ def anagram_check(s1: str, s2: str) -> bool:
     Assume the comparison is case-sensitive.
     '''
     # TODO: ADD YOUR CODE HERE
-    utils.NotImplemented()
+    sorted_s1 : str = sorted(s1)
+    sorted_s2 : str = sorted(s2)
+    if (sorted_s1 == sorted_s2):
+        return True
+    else :
+        return False
