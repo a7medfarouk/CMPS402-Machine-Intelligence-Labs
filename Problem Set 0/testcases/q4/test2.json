@@ -1,0 +1,5 @@
+{
+    "description": "Single element grid",
+    "input_args": ["Grid.GridFromArray([[42]])"],
+    "comparison_args": ["42"]
+}

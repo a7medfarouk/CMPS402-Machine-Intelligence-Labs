@@ -1,0 +1,5 @@
+{
+    "description": "Word Histogram Repeated Pattern",
+    "input_args": ["' '.join(['word'+str(i) for n in range(5) for i in range(n)])"],
+    "comparison_args": ["{'word0': 4, 'word1': 3, 'word2': 2, 'word3': 1}"]
+}

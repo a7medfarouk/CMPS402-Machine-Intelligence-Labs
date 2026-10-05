@@ -1,0 +1,5 @@
+{
+    "description": "Grid with mixed types where string 'a' appears most",
+    "input_args": ["Grid.GridFromArray([['a',1,'a'],[1,'a',1],['a',1,'a']])"],
+    "comparison_args": ["'a'"]
+}

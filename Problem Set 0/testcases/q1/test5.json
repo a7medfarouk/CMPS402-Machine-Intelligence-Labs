@@ -1,0 +1,5 @@
+{
+    "description": "Numbers and letters combined anagram",
+    "input_args": ["'abc123'", "'321cba'"],
+    "comparison_args": ["True"]
+}

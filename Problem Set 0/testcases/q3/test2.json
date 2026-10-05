@@ -1,0 +1,5 @@
+{
+    "description": "Some correct, grade B",
+    "input_args": ["[{\"points\": 50}, {\"points\": 30}, {\"points\": 20}]", "[True, True, False]"],
+    "comparison_args": ["(80, 'B')"]
+}

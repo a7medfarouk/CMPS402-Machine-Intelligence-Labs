@@ -1,0 +1,5 @@
+{
+    "description": "One correct only",
+    "input_args": ["[{\"points\": 40}, {\"points\": 40}, {\"points\": 20}]", "[False, True, False]"],
+    "comparison_args": ["(40, 'F')"]
+}

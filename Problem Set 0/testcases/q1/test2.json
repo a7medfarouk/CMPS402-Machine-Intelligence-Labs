@@ -1,0 +1,5 @@
+{
+    "description": "non-anagram with spaces",
+    "input_args": ["'a b'", "'ba'"],
+    "comparison_args": ["False"]
+}

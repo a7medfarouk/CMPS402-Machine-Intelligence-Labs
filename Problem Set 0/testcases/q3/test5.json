@@ -1,0 +1,5 @@
+{
+    "description": "Mixed answers leading to grade C",
+    "input_args": ["[{\"points\": 30}, {\"points\": 30}, {\"points\": 40}]", "[True, False, True]"],
+    "comparison_args": ["(70, 'C')"]
+}

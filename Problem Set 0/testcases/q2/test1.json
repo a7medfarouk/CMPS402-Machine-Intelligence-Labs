@@ -1,0 +1,5 @@
+{
+    "description": "Single word appears once",
+    "input_args": ["'hello'"],
+    "comparison_args": ["{'hello': 1}"]
+}

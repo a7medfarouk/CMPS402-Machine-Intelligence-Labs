@@ -1,0 +1,5 @@
+{
+    "description": "Identical strings anagrams?",
+    "input_args": ["'python'", "'python'"],
+    "comparison_args": ["True"]
+}

@@ -1,0 +1,5 @@
+{
+    "description": "All questions correct, perfect score",
+    "input_args": ["[{\"points\": 50}, {\"points\": 30}, {\"points\": 20}]", "[True, True, True]"],
+    "comparison_args": ["(100, 'A')"]
+}

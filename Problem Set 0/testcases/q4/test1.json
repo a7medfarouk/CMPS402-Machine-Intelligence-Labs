@@ -1,0 +1,6 @@
+{
+    "description": "3x3 grid",
+    "input_args": ["Grid.GridFromArray([[1,2,3],[4,2,6],[7,8,2]])"],
+    "comparison_args": ["2"]
+}
+ 

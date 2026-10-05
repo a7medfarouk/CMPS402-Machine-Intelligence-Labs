@@ -1,0 +1,5 @@
+{
+    "description": "Sentence with three words repeated differently",
+    "input_args": ["'one two two three three three'"],
+    "comparison_args": ["{'one': 1, 'two': 2, 'three': 3}"]
+}

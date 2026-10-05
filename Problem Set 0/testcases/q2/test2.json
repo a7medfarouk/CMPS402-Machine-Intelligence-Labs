@@ -1,0 +1,5 @@
+{
+    "description": "Empty string",
+    "input_args": ["''"],
+    "comparison_args": ["{}"]
+}

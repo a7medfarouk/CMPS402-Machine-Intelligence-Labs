@@ -1,0 +1,5 @@
+{
+    "description": "non-anagram",
+    "input_args": ["'hello'", "'world'"],
+    "comparison_args": ["False"]
+}

@@ -1,0 +1,5 @@
+{
+    "description": "Mixed letters and numbers",
+    "input_args": ["'a1 a1 b2'"],
+    "comparison_args": ["{'a1': 2, 'b2': 1}"]
+}

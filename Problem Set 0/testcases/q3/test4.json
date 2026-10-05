@@ -1,0 +1,5 @@
+{
+    "description": "No correct answers",
+    "input_args": ["[{\"points\": 25}, {\"points\": 25}, {\"points\": 50}]", "[False, False, False]"],
+    "comparison_args": ["(0, 'F')"]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "Problem Set 0: Introduction to Python",
+    "problems": [
+        {
+            "name": "Anagrams",
+            "testcases_path": "q1",
+            "function": "load_function('anagram_check.anagram_check')",
+            "timeout": 1
+        },
+        {
+            "name": "word histogram",
+            "testcases_path": "q2",
+            "function": "load_function('word_histogram.word_histogram')",
+            "timeout": 1
+        },
+        {
+            "name": "exam score",
+            "testcases_path": "q3",
+            "function": "load_function('exam_score.calculate_exam_score')",
+            "comparator": "approximate_comparator",
+            "timeout": 1
+        },
+        {
+            "name": "most frequent in grid",
+            "testcases_path": "q4",
+            "function": "load_function('most_frequent.most_frequent_item')",
+            "timeout": 1
+        },
+        {
+            "name": "Caesar Decipher",
+            "testcases_path": "q5",
+            "function": "load_function('caesar.caesar_dechiper')",
+            "comparator": "compare_decipher",
+            "timeout": 1
+        }
+    ]
+}
