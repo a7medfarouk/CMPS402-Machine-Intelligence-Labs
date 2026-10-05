@@ -36,5 +36,11 @@ def calculate_exam_score(questions: list[dict], answers: list[bool]) -> tuple[in
 
         Output → (80, "B")
     '''
+    raw_score : int = 0
     # TODO: ADD YOUR CODE HERE
-    utils.NotImplemented()
+    for index , answer in enumerate(answers):
+        if(answer == True) : 
+            raw_score += questions[index]["points"]
+    grade = score_to_grade(raw_score)
+    return raw_score, grade
+    
