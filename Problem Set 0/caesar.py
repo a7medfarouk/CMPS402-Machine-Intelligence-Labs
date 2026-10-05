@@ -1,4 +1,4 @@
-from typing import Tuple, List
+from typing import Tuple, List, Set
 import utils
 
 '''
@@ -17,4 +17,34 @@ def caesar_dechiper(ciphered: str, dictionary: List[str]) -> DechiperResult:
         It should return a DechiperResult (see above for more info) with the deciphered text, the cipher shift, and the number of deciphered words that are not in the dictionary. 
     '''
     #TODO: ADD YOUR CODE HERE
-    utils.NotImplemented()
+    cipher_shift : int = 0
+    deciphered_word : str
+    min_unknown_word_count = float('inf')
+    cipher_list : List = ciphered.split()
+    optimal_deciphered_list : List = []
+    dictionary_set : Set = set(dictionary)
+    for i in range(26):
+        
+        unknown_word_count : int = 0
+        deciphered_word_list : List = []
+        
+        for word in cipher_list:
+            
+            deciphered_word = ""
+            
+            for char in word:
+                deciphered_word += chr((ord(char)- ord('a') - i) % 26 + ord('a'))
+                
+            if deciphered_word not in dictionary_set : unknown_word_count += 1
+            
+            deciphered_word_list.append(deciphered_word)
+            
+        if unknown_word_count < min_unknown_word_count:
+            min_unknown_word_count = unknown_word_count
+            cipher_shift = i
+            optimal_deciphered_list = deciphered_word_list
+            
+    deciphered_text = " ".join(optimal_deciphered_list)
+    deciphered_text.strip()
+    
+    return deciphered_text, cipher_shift, min_unknown_word_count
