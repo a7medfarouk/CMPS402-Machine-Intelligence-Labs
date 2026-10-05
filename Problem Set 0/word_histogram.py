@@ -14,4 +14,11 @@ def word_histogram(text: str) -> dict:
     word_histogram("cat dog cat") -> {"cat": 2, "dog": 1}
     '''
     # TODO: ADD YOUR CODE HERE
-    utils.NotImplemented()
+    separated_words : List = text.split()
+    word_histogram_dict : Dict = dict()
+    for word in separated_words:
+        if (word_histogram_dict.get(word) == None):
+            word_histogram_dict[word] = 1
+        else: 
+            word_histogram_dict[word] += 1
+    return word_histogram_dict
