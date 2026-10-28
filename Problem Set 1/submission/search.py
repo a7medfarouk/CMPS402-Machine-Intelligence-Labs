@@ -2,6 +2,7 @@
 
 from campus.contracts import Node, Problem, reconstruct
 from collections import deque
+import heapq
 
 def BreadthFirstSearch(problem : Problem, initial_state):
     node = Node(initial_state)
@@ -14,6 +15,7 @@ def BreadthFirstSearch(problem : Problem, initial_state):
 
     while frontier:
         node = frontier.popleft()
+        frontier_states.discard(node.state)
         explored.add(node.state)
 
         for action in problem.get_actions(node.state):
@@ -28,33 +30,64 @@ def BreadthFirstSearch(problem : Problem, initial_state):
     return None
 
 
-def DepthFirstSearch(problem, initial_state):
-        node = Node(initial_state)
+def DepthFirstSearch(problem : Problem, initial_state):
+    node = Node(initial_state)
+    if problem.is_goal(node.state):
+        return reconstruct(node)
+
+    frontier = deque([node])
+    frontier_states = {node.state}
+    explored = set()
+
+    while frontier:
+        node = frontier.pop()
+        frontier_states.discard(node.state)
         if problem.is_goal(node.state):
             return reconstruct(node)
+        explored.add(node.state)
 
-        frontier = deque([node])
-        frontier_states = {node.state}
-        explored = set()
+        for action in problem.get_actions(node.state):
+            child_state = problem.get_successor(node.state, action)
+            if not (child_state in explored or child_state in frontier_states):
+                child = Node(child_state, node.cost + problem.get_cost(node.state, action), node, action)
+                frontier.append(child)
+                frontier_states.add(child.state)
 
-        while frontier:
-            node = frontier.pop()
-            if problem.is_goal(node.state):
-                return reconstruct(node)
-            explored.add(node.state)
-
-            for action in problem.get_actions(node.state):
-                child_state = problem.get_successor(node.state, action)
-                if not (child_state in explored or child_state in frontier_states):
-                    child = Node(child_state, node.cost + problem.get_cost(node.state, action), node, action)
-                    frontier.append(child)
-                    frontier_states.add(child.state)
-
-        return None
+    return None
 
 
 def UniformCostSearch(problem, initial_state):
-    raise NotImplementedError("Implement UCS")
+    node = Node(initial_state)                      
+    order = 0                                       
+    frontier = [(node.cost, order, node)]           
+    in_frontier = {node.state: node}                
+    explored = set()                                
+
+    while in_frontier:                              
+        while (node := heapq.heappop(frontier)[2]) is not in_frontier.get(node.state):
+            pass                                    
+        del in_frontier[node.state]
+        if problem.is_goal(node.state):            
+            return reconstruct(node)
+        explored.add(node.state)                    
+
+        for action in problem.get_actions(node.state):          
+            child = Node(                                       
+                problem.get_successor(node.state, action),
+                node.cost + problem.get_cost(node.state, action),
+                node,
+                action,
+            )
+            if child.state not in explored and child.state not in in_frontier:
+                order += 1
+                heapq.heappush(frontier, (child.cost, order, child))
+                in_frontier[child.state] = child
+            elif child.state in in_frontier and in_frontier[child.state].cost > child.cost:
+                order += 1                                      
+                heapq.heappush(frontier, (child.cost, order, child))
+                in_frontier[child.state] = child
+
+    return None
 
 
 def AStarSearch(problem, initial_state, heuristic):
