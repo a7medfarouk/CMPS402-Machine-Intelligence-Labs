@@ -1,0 +1,414 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CMPS402 Searching Assignment</title><style>
+    :root{font:16px/1.65 'Segoe UI',Arial,sans-serif;color:#243947;background:#f4f6f7}
+    *{box-sizing:border-box}body{margin:0}header{background:#203f4c;color:#fff;padding:16px 28px;display:flex;justify-content:space-between;gap:12px}header a{color:#fff}header span{font-size:14px}
+    .layout{display:grid;grid-template-columns:245px minmax(0,900px);max-width:1230px;margin:auto;gap:28px;padding:28px 20px}nav{position:sticky;top:20px;align-self:start;font-size:13px}nav strong{display:block;margin-bottom:8px}nav a{display:block;padding:6px 10px;border-left:2px solid #d5e0e4;text-decoration:none;color:#365864}nav a:hover{background:#e3edef;border-color:#397b80}
+    main{background:#fff;border:1px solid #d9e2e5;border-radius:10px;padding:34px 42px;min-width:0}h1{font-size:32px;line-height:1.2;color:#203f4c;margin:0 0 12px}h2{font-size:23px;line-height:1.35;margin:40px 0 14px;color:#205d66;border-top:1px solid #dce6e8;padding-top:24px;scroll-margin-top:20px}h2:first-of-type{margin-top:10px;border:0;padding-top:0}h3{font-size:17px;margin:26px 0 8px;color:#274c5d}p{margin:10px 0 14px}li{margin:7px 0}a{color:#176776}a:focus-visible{outline:3px solid #d8a63c;outline-offset:3px}code{font:13px/1.5 Consolas,monospace;background:#eef2f4;border-radius:3px;padding:1px 4px;overflow-wrap:anywhere}pre{background:#edf3f4;border:1px solid #d8e3e7;border-radius:6px;padding:13px 16px;overflow:auto}pre code{background:none;padding:0;white-space:pre;overflow-wrap:normal}table{border-collapse:collapse;width:100%;font-size:14px;margin:18px 0 24px;table-layout:fixed}th,td{text-align:left;vertical-align:top;padding:10px 12px;border:1px solid #dbe3e7;overflow-wrap:anywhere}th{background:#e6eff1;color:#264c59}tr:nth-child(even) td{background:#fafcfc}footer{text-align:center;color:#627c86;font-size:12px;margin:28px}
+    @media(max-width:900px){.layout{display:block;padding:14px}nav{position:static;margin-bottom:20px;columns:2}nav strong{column-span:all}main{padding:24px}header{padding:14px;font-size:14px}h1{font-size:27px}}
+    @media(max-width:520px){nav{columns:1}main{padding:18px}table{font-size:12px}th,td{padding:7px}header{display:block}}
+    @media print{body{background:#fff}header,nav,footer{display:none}.layout{display:block;padding:0}main{padding:0;border:0}h2,h3{break-after:avoid}pre,tr{break-inside:avoid}a{color:inherit}}
+    </style></head><body><header><strong>CMPS402 · Fall 2026</strong><span>Due 31 October 2026 · 11:59 PM</span></header><div class="layout"><nav aria-label="Contents"><strong>In this guide</strong><a href="#campus-courier">Campus Courier</a><a href="#1-world-rules">1. World rules</a><a href="#2-install-uv-and-start-the-app">2. Install uv and start the app</a><a href="#3-implement-the-planning-model">3. Implement the planning model</a><a href="#4-implement-five-generic-search-algorithms">4. Implement five generic search algorithms</a><a href="#5-design-a-portable-heuristic">5. Design a portable heuristic</a><a href="#6-test-and-understand-your-results">6. Test and understand your results</a><a href="#7-rubric-and-discussion-preparation">7. Rubric and discussion preparation</a><a href="#8-submission-steps">8. Submission steps</a><a href="#9-optional-gymnasium-extension">9. Optional Gymnasium extension</a><a href="#10-troubleshooting">10. Troubleshooting</a></nav><main><h1 id="cmps402-machine-intelligence-assignment-1-searching">CMPS402 - Machine Intelligence: Assignment 1: Searching</h1>
+<h2 id="campus-courier">Campus Courier</h2>
+<p>Implement a planning model, five search algorithms, and a heuristic for a courier moving through a known campus map. Use the supplied terminal app and replay viewer to test your code and investigate how the algorithms behave. This assignment is classical search: no training or image recognition is required.</p>
+<table>
+<thead>
+<tr>
+<th>Assessment</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total</td>
+<td><strong>7 marks per student</strong></td>
+</tr>
+<tr>
+<td>Team</td>
+<td><strong>Pairs</strong>; each member is assessed individually in the discussion</td>
+</tr>
+<tr>
+<td>Deadline</td>
+<td><strong>Saturday 31 October 2026 at 11:59 PM</strong></td>
+</tr>
+<tr>
+<td>Upload</td>
+<td>One Python-only ZIP per pair, containing the <code>submission/</code> folder</td>
+</tr>
+<tr>
+<td>Discussion</td>
+<td>Explanation of your implementation and application to unfamiliar examples</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Late submissions will be penalized heavily. A submission up to two hours late receives a lower late penalty than a submission more than two hours late.</strong> The lower-penalty window ends on Sunday 1 November 2026 at 1:59 AM. This is not a penalty-free grace period. Start the upload early and check that it finishes successfully.</p>
+<p><strong>Plagiarism and cheating are prohibited.</strong> Work with your registered partner. Do not copy or exchange solutions with other teams, distribute your solution, or submit someone else's work as your own. Each member must understand the submitted implementation and explain its decisions.</p>
+<h2 id="1-world-rules">1. World rules</h2>
+<p>The whole map is known. Movement is deterministic, orthogonal, and restricted to the rectangular map. Coordinates are zero-based <code>(row, column)</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>S</code></td>
+<td>Exactly one start</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>Exactly one destination</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>Ordinary traversable tile</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>Expensive terrain: <strong>cost 5 to enter</strong></td>
+</tr>
+<tr>
+<td><code>#</code></td>
+<td>Wall: never traversable</td>
+</tr>
+<tr>
+<td><code>K</code></td>
+<td>At most one required pickup/access pass; collected automatically on entry</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>Door: enter only after collecting the pass</td>
+</tr>
+</tbody>
+</table>
+<p>Every other legal move costs <strong>1</strong>, including entry into <code>S</code>, <code>G</code>, <code>K</code>, and <code>D</code>. The pass is never consumed. With a <code>K</code> on the map, the goal requires reaching <code>G</code> <strong>after collecting it</strong>; passing through <code>G</code> earlier does not finish the task. Without <code>K</code>, reaching <code>G</code> completes the task and doors cannot be unlocked. Completed goal states have no legal successors. Unreachable maps are valid inputs.</p>
+<p>There are no diagonal moves, wraparound, random transitions, or wait actions. Illegal actions are omitted from the search model's successors.</p>
+<h3 id="required-action-order">Required action order</h3>
+<p><code>submission/model.py</code> supplies this constant:</p>
+<pre><code class="language-python">ACTIONS = (&quot;UP&quot;, &quot;RIGHT&quot;, &quot;DOWN&quot;, &quot;LEFT&quot;)
+</code></pre>
+<p><code>get_actions(state)</code> must return legal actions <strong>in that order</strong>, skipping illegal moves without reordering the remaining actions. Do not return a set or alphabetically sort the actions. From the top-left corner of the following map, the order is <code>['RIGHT', 'DOWN']</code>:</p>
+<pre><code class="language-text">SwG
+...
+</code></pre>
+<p>The direct route has 2 moves and cost 6. The detour has 4 moves and cost 4. Search algorithms do not all optimize the same quantity.</p>
+<h2 id="2-install-uv-and-start-the-app">2. Install uv and start the app</h2>
+<p>Extract the student ZIP into its own folder. In VS Code, open that folder and choose <strong>Terminal &gt; New Terminal</strong>. Windows Terminal also works. Do not use the editor's Output pane or Debug Console. The terminal's current folder must contain <code>app.py</code> and <code>pyproject.toml</code>, not just the <code>submission/</code> folder.</p>
+<h3 id="install-uv-if-needed">Install uv if needed</h3>
+<p>First try <code>uv --version</code>. If the command is recognized, skip installation. Otherwise use one of the official installation methods below.</p>
+<p><strong>Windows PowerShell with WinGet:</strong></p>
+<pre><code class="language-powershell">winget install --id=astral-sh.uv -e
+</code></pre>
+<p><strong>Windows alternative using the official installer:</strong></p>
+<pre><code class="language-powershell">powershell -ExecutionPolicy ByPass -c &quot;irm https://astral.sh/uv/install.ps1 | iex&quot;
+</code></pre>
+<p><strong>macOS or Linux using the official installer:</strong></p>
+<pre><code class="language-sh">curl -LsSf https://astral.sh/uv/install.sh | sh
+</code></pre>
+<p>The installer commands download and execute a script. Use the official address only; consult the <a href="https://docs.astral.sh/uv/getting-started/installation/">official uv installation instructions</a> if you want to inspect the script first or use another installation method.</p>
+<p>Close and reopen your terminal after installing, then check:</p>
+<pre><code class="language-powershell">uv --version
+</code></pre>
+<h3 id="set-up-this-assignment">Set up this assignment</h3>
+<p>Run these commands from the extracted assignment folder:</p>
+<pre><code class="language-powershell">uv sync --locked
+uv run --locked app.py
+</code></pre>
+<p>uv uses the supplied lock file and Python 3.14. The first setup may download Python and the terminal packages, so internet access may be needed. The default installation uses Rich and Questionary; Gymnasium and NumPy are <strong>not required for the assessed assignment</strong>. Do not edit the lock file or Python version.</p>
+<p>Use <strong>Up/Down arrows and Enter</strong>. Select <strong>Back</strong> to return or <strong>Exit</strong> to quit. Ctrl+C cancels the current action. Long menus scroll with the selection. If arrow input is unsupported, use:</p>
+<pre><code class="language-powershell">uv run --locked app.py --plain-menu
+</code></pre>
+<p>The fallback uses numbers, with <code>0</code> for Back/Exit. All assessed operations also have direct commands in Section 6.</p>
+<h3 id="recommended-workflow">Recommended workflow</h3>
+<ol>
+<li>Select <strong>Check setup</strong>, then <strong>Watch worked examples</strong>. The recorded demo works before you implement anything.</li>
+<li>Implement the model in <code>submission/model.py</code>, then BFS and DFS in <code>submission/search.py</code>.</li>
+<li>Use <strong>Run public checks</strong> as you work. From the results menu, re-run all checks, failed checks, or one selected check; you can also inspect a result's details.</li>
+<li>Implement UCS, greedy, A*, and the heuristic. Use <strong>Run my agent on a map</strong> to inspect the recorded behavior.</li>
+<li>Select <strong>Compare all algorithms</strong> and use the results to prepare for discussion.</li>
+<li>Enter both members' names/IDs, build the Python-only ZIP, and submit it as described in Section 8.</li>
+</ol>
+<p><strong>SETUP OK checks your environment, not your solution. NOT IMPLEMENTED is normal in the untouched starter.</strong> No manual logging is required.</p>
+<h2 id="3-implement-the-planning-model">3. Implement the planning model</h2>
+<p>Implement <code>CampusProblem</code> in <code>submission/model.py</code>. Choose a hashable state representation that contains enough information to determine future legal moves and goal status.</p>
+<table>
+<thead>
+<tr>
+<th>Entry point</th>
+<th>Required behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__(specification)</code></td>
+<td>Keep the supplied <code>MapSpec</code> as <code>self.map</code>; already supplied</td>
+</tr>
+<tr>
+<td><code>get_initial_state()</code></td>
+<td>Return the initial planning state</td>
+</tr>
+<tr>
+<td><code>describe(state)</code></td>
+<td>Convert your state to <code>WorldState(row, column, has_key)</code></td>
+</tr>
+<tr>
+<td><code>is_goal(state)</code></td>
+<td>Return a Boolean under the world rules</td>
+</tr>
+<tr>
+<td><code>get_actions(state)</code></td>
+<td>Return legal strings in <strong>UP, RIGHT, DOWN, LEFT</strong> order</td>
+</tr>
+<tr>
+<td><code>get_successor(state, action)</code></td>
+<td>Return the next state for a legal action</td>
+</tr>
+<tr>
+<td><code>get_cost(state, action)</code></td>
+<td>Return the positive cost of that move</td>
+</tr>
+</tbody>
+</table>
+<p>Keep inheritance from the supplied <code>Problem</code> class. Its <code>initial</code> property and <code>successors(state)</code> adapter are provided conveniences, not additional tasks. <code>MapSpec</code> exposes <code>rows</code>, <code>height</code>, <code>width</code>, <code>start</code>, <code>goal</code>, and <code>pickup</code>; <code>pickup</code> is <code>None</code> when absent.</p>
+<p><code>describe</code> is the common interface between your chosen state encoding and the supplied tools. It must report the actual situation. You may use tuples, frozen objects, or another correct hashable representation; staff checks do not require one particular encoding.</p>
+<p>The package contains a parser and finite input/output examples, not a complete world implementation. Public checks compare your model with those examples. Private checks use a separate staff model and unseen maps.</p>
+<h2 id="4-implement-five-generic-search-algorithms">4. Implement five generic search algorithms</h2>
+<p>Complete these functions in <code>submission/search.py</code>:</p>
+<pre><code class="language-python">BreadthFirstSearch(problem, initial_state)
+DepthFirstSearch(problem, initial_state)
+UniformCostSearch(problem, initial_state)
+AStarSearch(problem, initial_state, heuristic)
+BestFirstSearch(problem, initial_state, heuristic)
+</code></pre>
+<p><code>BestFirstSearch</code> means <strong>greedy best-first search</strong>. Return a <strong>list of action strings</strong>, or <code>None</code> when no solution exists. An initial goal returns <code>[]</code> without expansion. Use the function's <code>initial_state</code> argument; do not replace it with the map's original start. The supplied <code>solve(...)</code> dispatcher connects your functions to the app and needs no changes.</p>
+<p>Use <code>problem.is_goal</code>, <code>problem.get_actions</code>, <code>problem.get_successor</code>, and <code>problem.get_cost</code>. A heuristic passed to a search entry point has signature <code>heuristic(problem, state)</code>. Algorithms must also work on small graphs where states are not coordinates and actions are not compass directions. Do not inspect campus tiles inside generic search.</p>
+<p>Choose and operate your own frontier containers, for example <code>list</code>, <code>collections.deque</code>, or <code>heapq</code>. No frontier implementation is supplied. Optional helpers <code>Node(state, cost=0, parent=None, action=None)</code> and <code>reconstruct(node)</code> are available. Sharing helper code between algorithms is allowed.</p>
+<h3 id="automatic-recording-and-limits">Automatic recording and limits</h3>
+<p>Use the provided problem normally and return your actions. The wrapper records expansions automatically; the runner records the route, moves, cost, cumulative route cost, and elapsed time. Do not add logging hooks, special frontier wrappers, or invented statistics. The viewer does not measure peak frontier size or record every frontier removal.</p>
+<p>The expansion budget is <strong>10,000 per run</strong>. The default local timeout is <strong>10 seconds per check/run</strong>; the private grader uses <strong>20 seconds per test group</strong>. You can increase a local timeout with <code>--timeout SECONDS</code> when diagnosing a slow run; that does not change grading limits. Speed rankings or using the whole budget do not earn marks.</p>
+<h2 id="5-design-a-portable-heuristic">5. Design a portable heuristic</h2>
+<p>Complete <code>heuristic(problem, state)</code> in <code>submission/heuristic.py</code>. Get the situation through <strong><code>problem.describe(state)</code></strong>, and read map metadata through <code>problem.map</code>.</p>
+<p><strong>Do not access <code>state.row</code>, unpack/index <code>state</code>, or depend on your own model's extra attributes or state class.</strong> Staff tests evaluate your heuristic with a correct model whose internal state representation may differ from yours.</p>
+<p>Return finite, nonnegative values that are zero at completed goals, admissible, and consistent on reachable transitions. Design a lower bound stronger than the supplied baseline. For this published case, the initial estimate must be <strong>greater than 5 and at most 9</strong>:</p>
+<pre><code class="language-text">S....G
+......
+K.....
+</code></pre>
+<h2 id="6-test-and-understand-your-results">6. Test and understand your results</h2>
+<p>The terminal menu is the recommended interface. If you prefer commands, run them from the extracted assignment folder:</p>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Check setup</td>
+<td><code>uv run --locked app.py setup-check</code></td>
+</tr>
+<tr>
+<td>Launch menus</td>
+<td><code>uv run --locked app.py</code></td>
+</tr>
+<tr>
+<td>Run all public checks</td>
+<td><code>uv run --locked app.py check</code></td>
+</tr>
+<tr>
+<td>Re-run check 14 with details</td>
+<td><code>uv run --locked app.py check --case 14 --details</code></td>
+</tr>
+<tr>
+<td>Re-run model checks</td>
+<td><code>uv run --locked app.py check --case Model --details</code></td>
+</tr>
+<tr>
+<td>Create worked-example replay</td>
+<td><code>uv run --locked app.py demo</code></td>
+</tr>
+<tr>
+<td>Run BFS on weighted terrain</td>
+<td><code>uv run --locked app.py run --map maps/weighted_detour.txt --algorithm bfs</code></td>
+</tr>
+<tr>
+<td>Run A* with your heuristic</td>
+<td><code>uv run --locked app.py run --map maps/demo.txt --algorithm astar --heuristic student</code></td>
+</tr>
+<tr>
+<td>Generate comparisons</td>
+<td><code>uv run --locked app.py experiments</code></td>
+</tr>
+<tr>
+<td>Build the upload ZIP</td>
+<td><code>uv run --locked app.py submit</code></td>
+</tr>
+<tr>
+<td>Show command options</td>
+<td><code>uv run --locked app.py --help</code></td>
+</tr>
+</tbody>
+</table>
+<p>Algorithm names are <code>bfs</code>, <code>dfs</code>, <code>ucs</code>, <code>greedy</code>, and <code>astar</code>. Heuristic names are <code>baseline</code> and <code>student</code>; BFS/DFS/UCS do not need a heuristic choice. To keep a named direct-command run, add <code>--output output/my-run.json</code>. Otherwise the next direct run overwrites <code>output/run.html</code>; menu runs use descriptive names.</p>
+<h3 id="public-checks-and-re-running">Public checks and re-running</h3>
+<p>There are <strong>14 public checks</strong>: four model checks; five algorithm-priority checks; BFS duplicate suppression; FIFO ties; initial goals/unreachable cycles; heuristic lower-bound/consistency; and heuristic portability through <code>describe</code>.</p>
+<p>After <strong>Run public checks</strong>, use the results menu to <strong>Re-run all checks</strong>, <strong>Re-run failed checks</strong>, <strong>Re-run one check</strong>, or read a check's details. Selected re-runs update those results while preserving the other displayed results. If you edited related code, re-run all checks before submission: older passing results are not a fresh check of your changes. Direct-command <code>--case</code> runs only the selected check(s).</p>
+<table>
+<thead>
+<tr>
+<th>Verdict</th>
+<th>Meaning and next step</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PASS</td>
+<td>Available local checks passed; continue testing and preparing for discussion</td>
+</tr>
+<tr>
+<td>NOT IMPLEMENTED</td>
+<td>Complete the named starter function</td>
+</tr>
+<tr>
+<td>WRONG ANSWER</td>
+<td>Compare expected/actual behavior and re-run the smallest failing case</td>
+</tr>
+<tr>
+<td>TIME LIMIT</td>
+<td>Worker exceeded its time limit; check loops, imports, and duplicates</td>
+</tr>
+<tr>
+<td>RESOURCE LIMIT</td>
+<td>Expansion budget exceeded; check repeated states/stale entries</td>
+</tr>
+<tr>
+<td>RUNTIME ERROR</td>
+<td>Fix the reported syntax/import/type/index error first</td>
+</tr>
+<tr>
+<td>NO SOLUTION</td>
+<td>Valid for a bundled map certified unreachable by its reference facts</td>
+</tr>
+<tr>
+<td>LOCAL ONLY</td>
+<td>Custom map has no independent published answer; inspect your model as well</td>
+</tr>
+</tbody>
+</table>
+<p>Use the diagnostic's reason, file/line, and next step. Public passes are not a final mark or proof of all model rules. Private tests check the same stated requirements on additional maps/graphs. They assess algorithms and heuristics with a correct staff model separately from your own model, to avoid cascading penalties.</p>
+<h3 id="replay-and-output-files">Replay and output files</h3>
+<p>Open <code>output/demo.html</code>, <code>output/run.html</code>, or a menu run's HTML file in a browser. Choose a <strong>Map</strong>, choose an <strong>Algorithm</strong>, then <strong>Play</strong> or <strong>Step</strong>. <strong>Solution route</strong> follows the returned actions; <strong>Search exploration</strong> shows hypothetical expanded states, not the courier walking. Step narration explains position, pickup, and cumulative route cost. Purple indicates possession of the pass.</p>
+<p>Use <strong>Compare this map</strong> and a row's <strong>View</strong> button to compare recorded algorithms. <strong>Issues only</strong> filters the comparison without resetting playback; <strong>Next issue</strong> opens a failed run and its explanation. Heuristic choices appear for informed algorithms. Replays are saved after execution, not streamed during search, and work without a server or account.</p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>output/checks.txt</code></td>
+<td>Complete readable check details</td>
+</tr>
+<tr>
+<td><code>output/run.html</code>, <code>output/runs/*.html</code></td>
+<td>Recorded single-run playback</td>
+</tr>
+<tr>
+<td><code>output/experiments.html</code></td>
+<td>Map-by-map comparison and playback</td>
+</tr>
+<tr>
+<td><code>output/experiments.txt</code></td>
+<td>Readable comparison and failure details</td>
+</tr>
+<tr>
+<td><code>output/experiments.csv</code></td>
+<td>Spreadsheet-friendly comparison</td>
+</tr>
+<tr>
+<td><code>output/submissions/</code></td>
+<td>ZIP to upload</td>
+</tr>
+</tbody>
+</table>
+<p>The app also saves JSON internally for its replay and diagnostic tools; you do not need to edit or submit it. Local route replay uses <strong>your model</strong>. Bundled reference facts and model examples help find errors, but do not independently certify every transition. Custom maps are explicitly labeled LOCAL ONLY.</p>
+<h2 id="7-rubric-and-discussion-preparation">7. Rubric and discussion preparation</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th style="text-align:right">Marks</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Correct code, shared</td>
+<td style="text-align:right"><strong>3.00</strong></td>
+<td>Model 0.50; BFS 0.25; DFS 0.25; UCS 0.50; greedy 0.50; A* 0.50; heuristic 0.50</td>
+</tr>
+<tr>
+<td>Explanation, individual</td>
+<td style="text-align:right"><strong>2.00</strong></td>
+<td>Explanation of code and implementation</td>
+</tr>
+<tr>
+<td>Harder application, individual</td>
+<td style="text-align:right"><strong>2.00</strong></td>
+<td>Applying conceptual understanding</td>
+</tr>
+<tr>
+<td>Total per student</td>
+<td style="text-align:right"><strong>7.00</strong></td>
+<td><strong>3 shared + 4 individual</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Code receives criterion-level partial credit, not an all-or-nothing score or an overall pass-percentage conversion. Equivalent valid optimal routes are accepted. Controlled micrographs deliberately test the stated priority/action/tie rules; larger maps are not graded by matching an exact reference path or expansion count.</p>
+<p>Each member explains the submitted implementation and reasons through small unfamiliar examples during discussion. You may draw, trace, and demonstrate; polished speaking is not assessed. Harder questions apply taught principles, not unannounced algorithms or Python trivia. <strong>No written report, prepared-answer file, or separate counterexample file is required.</strong> Producing a CSV or attractive graphics earns no separate marks.</p>
+<p><strong>Compare all algorithms</strong> automatically runs 12 common maps with five algorithms and an additional A* run using your heuristic: <strong>72 runs</strong>. All common experiment maps are solvable. Use the results to discuss moves versus cost, duplicates, changed inventory, heuristic quality, and the limitations of runtime/expansion comparisons. Fewer expansions do not always imply less runtime. Discuss frontier memory qualitatively; no frontier-size measurement is required.</p>
+<h2 id="8-submission-steps">8. Submission steps</h2>
+<ol>
+<li>Finish <code>submission/model.py</code>, <code>submission/search.py</code>, and <code>submission/heuristic.py</code>. You may add Python helpers inside <code>submission/</code>; use relative imports. Do not modify supplied runtime files for submission.</li>
+<li>In the app, choose <strong>Enter member names / IDs</strong>, or fill the literal <code>MEMBERS</code> list in <code>submission/student_info.py</code>. Check both names and IDs carefully.</li>
+<li>Re-run all public checks. Inspect unresolved failures and test your own cases. Packaging is not a correctness check.</li>
+<li>Choose <strong>Build Python-only submission ZIP</strong>, or run <code>uv run --locked app.py submit</code>.</li>
+<li>Locate the generated file under <code>output/submissions/</code>. Its name includes both members' names and IDs, for example <code>Ahmed_Ali_1230137__Abdelrahman_Hassan_1230067.zip</code>.</li>
+<li>Open the ZIP to verify that it contains <strong>Python files under <code>submission/</code> only</strong>, including <code>student_info.py</code>. Do not upload the entire project, virtual environment, maps, CSVs, JSON, replay HTML, or optional-extension files.</li>
+<li><strong>One member uploads the pair's ZIP to the Google Classroom before the deadline.</strong> Verify the pair's details, complete the submission action, and check the confirmation/status. Keep a local copy of the exact uploaded ZIP.</li>
+</ol>
+<p>Do not wait until 11:59 PM to package or upload. The recorded successful submission time determines lateness. Late submissions are penalized as stated at the start of this document.</p>
+<h2 id="9-optional-gymnasium-extension">9. Optional Gymnasium extension</h2>
+<p>This extension is <strong>optional, ungraded, and not a bonus</strong>. It is separate from the public checks and is not part of the 7 marks. Attempt it only after completing the assessed work. Keep its files outside <code>submission/</code> and do not include them in your upload.</p>
+<p><code>optional_gym/environment.py</code> supplies a <code>CampusCourierEnv</code> starter: constructor, observation/action spaces, serialization through <code>describe</code>, action-mask helper, and text rendering. Complete <strong><code>reset</code> and <code>step</code></strong> as a thin adapter around your completed model. Do not duplicate the world rules. No reinforcement-learning algorithm is required.</p>
+<p>Install the optional locked dependencies and run its separate checks:</p>
+<pre><code class="language-powershell">uv sync --locked --extra gym
+uv run --locked --extra gym -m optional_gym.checks
+</code></pre>
+<p>The terminal app also has <strong>Optional Gymnasium extension</strong>. That menu never adds these checks to required public-check results. Optional dependencies are selected using uv's <a href="https://docs.astral.sh/uv/concepts/projects/dependencies/#optional-dependencies">documented extras mechanism</a>.</p>
+<h3 id="adapter-contract">Adapter contract</h3>
+<ul>
+<li>Constructor: <code>CampusCourierEnv(specification, max_steps=100, render_mode=None, model_class=None)</code>. The default model class is your <code>CampusProblem</code>; staff can supply another compatible model.</li>
+<li>Action numbers: <strong>0 = UP, 1 = RIGHT, 2 = DOWN, 3 = LEFT</strong>. <code>action_space</code> is <code>Discrete(4)</code>.</li>
+<li>Observation: a dictionary with integer <code>row</code>, <code>column</code>, and <code>has_key</code> (0 or 1), obtained through your model's <code>describe</code>. The supplied observation space describes their valid ranges.</li>
+<li><code>reset(seed=..., options=...)</code>: call <code>super().reset(seed=seed)</code>, restore the model's initial state, set <code>_steps = 0</code> and <code>_finished = False</code>, then return <code>(observation, info)</code> using the supplied helpers.</li>
+<li><code>step(action)</code>: require reset and an unfinished episode; reject an out-of-range action with <code>ValueError</code>. For a legal move, use the model's cost and successor functions. For an in-range but illegal move, stay in place and use cost 1. Count every attempted in-range action toward <code>_steps</code>.</li>
+<li>Reward is <strong>negative move cost</strong>, with no goal bonus. Return <code>(observation, reward, terminated, truncated, info)</code>. <code>terminated</code> means the model's goal is satisfied. <code>truncated</code> means the step limit was reached without completion; if both occur on the same move, termination takes precedence. Set <code>_finished</code> when either is true; stepping before reset or after the episode ends raises <code>RuntimeError</code>.</li>
+<li><code>info</code> contains the supplied <code>action_mask</code> in the stated action order and the step count. <code>render()</code> returns the supplied text map with <code>@</code> at the courier. Rendering is optional; no graphics dependencies are required.</li>
+</ul>
+<p>The eight optional checks cover reset/spaces/order, weighted costs, illegal moves/time limits, goal-versus-limit precedence, pickup/doors/early destination, reset/render, invalid actions/episode order, and Gymnasium API compatibility. NOT IMPLEMENTED/errors are expected until you complete the adapter and core model. Read the <a href="https://gymnasium.farama.org/api/env/">Gymnasium Env API</a> for the return signatures.</p>
+<h2 id="10-troubleshooting">10. Troubleshooting</h2>
+<ul>
+<li><strong>uv is not recognized:</strong> reopen the terminal after installation; run <code>uv --version</code>. Use the official installation guide if PATH still needs attention.</li>
+<li><strong>No pyproject.toml found:</strong> change to the extracted assignment's root folder, not its parent or <code>submission/</code>.</li>
+<li><strong>Arrow keys do not work:</strong> use a real terminal or <code>--plain-menu</code>. Direct commands remain available.</li>
+<li><strong>Heuristic passes map runs but fails portability:</strong> use <code>problem.describe(state)</code> instead of your model's internal state representation; re-run check 14.</li>
+<li><strong>Unexpected trace/order:</strong> check <strong>UP, RIGHT, DOWN, LEFT</strong>, FIFO ties, BFS's generation-time goal test, and stale/duplicate handling.</li>
+<li><strong>Old replay still visible:</strong> finish the run and reopen or refresh its generated HTML file. A replay is a saved recording.</li>
+<li><strong>Optional checks cannot import Gymnasium:</strong> use <code>--extra gym</code> for both installation and running. The required search assignment does not need it.</li>
+<li><strong>You need setup or accessibility help:</strong> contact any of the teaching assistants early, so we can resolve this as early as possible.</li>
+</ul>
+</main></div></body></html>

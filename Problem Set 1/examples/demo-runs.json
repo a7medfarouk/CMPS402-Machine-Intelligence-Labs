@@ -1,0 +1,2624 @@
+[
+  {
+    "schema": 4,
+    "map": [
+      "SwwwwwG",
+      ".#.#.D.",
+      "...#...",
+      ".#K....",
+      "......."
+    ],
+    "algorithm": "bfs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "RIGHT",
+      "RIGHT",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 36,
+    "length": 12,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 10
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 11
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 12
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 13
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 14
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 15
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 20
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 25
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 30
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 35
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 36
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": true
+      }
+    ],
+    "expansions": 58,
+    "seconds": 0.0006008998025208712,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "demo"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwwwwwG",
+      ".#.#.D.",
+      "...#...",
+      ".#K....",
+      "......."
+    ],
+    "algorithm": "dfs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "UP",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "DOWN",
+      "LEFT",
+      "LEFT",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "LEFT",
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "UP",
+      "LEFT",
+      "UP",
+      "RIGHT",
+      "UP",
+      "LEFT",
+      "UP",
+      "RIGHT"
+    ],
+    "cost": 58,
+    "length": 42,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 2
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 3
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 4
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 5
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 6
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": false,
+        "cost_so_far": 7
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": false,
+        "cost_so_far": 8
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": false,
+        "cost_so_far": 9
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": false,
+        "cost_so_far": 10
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": false,
+        "cost_so_far": 11
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": false,
+        "cost_so_far": 12
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": false,
+        "cost_so_far": 13
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": false,
+        "cost_so_far": 14
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 15
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 16
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": true,
+        "cost_so_far": 17
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 18
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 19
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 20
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": true,
+        "cost_so_far": 21
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 22
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 23
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 28
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 33
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 38
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 39
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 40
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 41
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 42
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 43
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 44
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 45
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 46
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 47
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 48
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 49
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 50
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 51
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 52
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 57
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 58
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": true
+      }
+    ],
+    "expansions": 45,
+    "seconds": 0.0006359999533742666,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "demo"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwwwwwG",
+      ".#.#.D.",
+      "...#...",
+      ".#K....",
+      "......."
+    ],
+    "algorithm": "ucs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "DOWN",
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "UP"
+    ],
+    "cost": 12,
+    "length": 12,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 2
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 3
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 4
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 5
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 6
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 7
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 8
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 9
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 10
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 11
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 12
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      }
+    ],
+    "expansions": 49,
+    "seconds": 0.0005320000927895308,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "demo"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwwwwwG",
+      ".#.#.D.",
+      "...#...",
+      ".#K....",
+      "......."
+    ],
+    "algorithm": "greedy",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "RIGHT",
+      "RIGHT",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 36,
+    "length": 12,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 10
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 11
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 12
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 13
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 14
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 15
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 20
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 25
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 30
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 35
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 36
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "has_key": true
+      }
+    ],
+    "expansions": 29,
+    "seconds": 0.0004586998838931322,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "demo"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwwwwwG",
+      ".#.#.D.",
+      "...#...",
+      ".#K....",
+      "......."
+    ],
+    "algorithm": "astar",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "DOWN",
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "UP"
+    ],
+    "cost": 12,
+    "length": 12,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 2
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 3
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 4
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 5
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 6
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 7
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 8
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 9
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "has_key": true,
+        "cost_so_far": 10
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 11
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "has_key": true,
+        "cost_so_far": 12
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "has_key": true
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "has_key": true
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "has_key": true
+      }
+    ],
+    "expansions": 21,
+    "seconds": 0.00037189992144703865,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "demo"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwG",
+      "..."
+    ],
+    "algorithm": "bfs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 6,
+    "length": 2,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 6
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      }
+    ],
+    "expansions": 2,
+    "seconds": 5.170004442334175e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "weighted_detour"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwG",
+      "..."
+    ],
+    "algorithm": "dfs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "UP"
+    ],
+    "cost": 4,
+    "length": 4,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 2
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 4
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false
+      }
+    ],
+    "expansions": 4,
+    "seconds": 7.16999638825655e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "weighted_detour"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwG",
+      "..."
+    ],
+    "algorithm": "ucs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "UP"
+    ],
+    "cost": 4,
+    "length": 4,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 2
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 4
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false
+      }
+    ],
+    "expansions": 4,
+    "seconds": 8.79999715834856e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "weighted_detour"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwG",
+      "..."
+    ],
+    "algorithm": "greedy",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 6,
+    "length": 2,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 6
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      }
+    ],
+    "expansions": 2,
+    "seconds": 6.309989839792252e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "weighted_detour"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "SwG",
+      "..."
+    ],
+    "algorithm": "astar",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "UP"
+    ],
+    "cost": 4,
+    "length": 4,
+    "path": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 2
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 4
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "has_key": false
+      }
+    ],
+    "expansions": 4,
+    "seconds": 0.0001400001347064972,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "weighted_detour"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "K.SDG"
+    ],
+    "algorithm": "bfs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "LEFT",
+      "LEFT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 6,
+    "length": 6,
+    "path": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 2
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 4
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 6
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      }
+    ],
+    "expansions": 6,
+    "seconds": 7.890001870691776e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "key_revisit"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "K.SDG"
+    ],
+    "algorithm": "dfs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "LEFT",
+      "LEFT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 6,
+    "length": 6,
+    "path": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 2
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 4
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 6
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      }
+    ],
+    "expansions": 6,
+    "seconds": 7.759989239275455e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "key_revisit"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "K.SDG"
+    ],
+    "algorithm": "ucs",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "LEFT",
+      "LEFT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 6,
+    "length": 6,
+    "path": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 2
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 4
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 6
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      }
+    ],
+    "expansions": 6,
+    "seconds": 7.910002022981644e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "key_revisit"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "K.SDG"
+    ],
+    "algorithm": "greedy",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "LEFT",
+      "LEFT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 6,
+    "length": 6,
+    "path": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 2
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 4
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 6
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      }
+    ],
+    "expansions": 6,
+    "seconds": 8.739996701478958e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "key_revisit"
+  },
+  {
+    "schema": 4,
+    "map": [
+      "K.SDG"
+    ],
+    "algorithm": "astar",
+    "heuristic": "baseline",
+    "status": "ok",
+    "actions": [
+      "LEFT",
+      "LEFT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ],
+    "cost": 6,
+    "length": 6,
+    "path": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false,
+        "cost_so_far": 0
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false,
+        "cost_so_far": 1
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true,
+        "cost_so_far": 2
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true,
+        "cost_so_far": 3
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true,
+        "cost_so_far": 4
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true,
+        "cost_so_far": 5
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "has_key": true,
+        "cost_so_far": 6
+      }
+    ],
+    "expanded": [
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": false
+      },
+      {
+        "row": 0,
+        "column": 0,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "has_key": true
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "has_key": true
+      }
+    ],
+    "expansions": 6,
+    "seconds": 8.909986354410648e-05,
+    "validation_scope": "Public checks and replay through your model; hidden grading uses a separate private world implementation.",
+    "case": "key_revisit"
+  }
+]

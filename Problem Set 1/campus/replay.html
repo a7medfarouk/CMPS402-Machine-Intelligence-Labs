@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Campus Courier | Replay lab</title>
+<style>__STYLE__</style>
+</head>
+<body>
+<main>
+  <header class="page-head">
+    <div><p class="eyebrow">CMPS402 · SEARCHING ASSIGNMENT</p><h1>Replay lab</h1><p class="subtle">Choose a map, pick an algorithm, then watch or compare its recorded run.</p></div>
+    <button id="nextIssue" class="secondary" type="button">Next issue</button>
+  </header>
+  <p id="empty" class="empty" hidden>No runs recorded yet. In the terminal app, choose <strong>Run my agent on a map</strong> or <strong>Compare all algorithms</strong>.</p>
+  <section id="workspace">
+    <section class="selection panel" aria-label="Choose a recorded run">
+      <label class="map-choice"><span class="step-label">1 · Map</span><select id="map" aria-label="Map"></select><span id="mapInfo" class="subtle small"></span></label>
+      <fieldset><legend class="step-label">2 · Algorithm</legend><div id="algorithms" class="segments"></div></fieldset>
+      <label id="heuristicGroup"><span class="step-label">Heuristic</span><select id="heuristic" aria-label="Heuristic"></select><span id="heuristicNote" class="subtle small"></span></label>
+    </section>
+    <div class="content-grid">
+      <section class="panel replay-panel" aria-label="Map and playback">
+        <div class="run-heading"><h2 id="runTitle">Recorded run</h2><span id="status" class="badge"></span></div>
+        <p id="statusMessage" class="subtle"></p>
+        <div class="metrics"><div><span>Route cost</span><strong id="cost">—</strong></div><div><span>Moves</span><strong id="moves">—</strong></div><div><span>States expanded</span><strong id="expanded">—</strong></div></div>
+        <div class="view-switch" role="group" aria-label="Playback view"><button id="routeView" type="button">Solution route</button><button id="searchView" type="button">Search exploration</button></div>
+        <p id="viewHelp" class="small subtle"></p>
+        <div class="playback"><button id="restart" type="button" aria-label="Restart playback">Restart</button><button id="previous" type="button" aria-label="Previous step">← Step</button><button id="play" class="primary" type="button">Play</button><button id="next" type="button" aria-label="Next step">Step →</button><label class="speed">Speed<select id="speed" aria-label="Playback speed"><option value="800">0.5×</option><option value="400" selected>1×</option><option value="200">2×</option><option value="100">4×</option></select></label></div>
+        <label class="scrubber"><span id="stepLabel">Start</span><input id="frame" type="range" min="0" max="0" value="0" aria-label="Playback step"></label>
+        <div class="board"><canvas id="grid" role="img" aria-label="Recorded campus map"></canvas></div>
+        <div class="legend" aria-label="Map legend"><span><b>●</b> Courier</span><span><b>S</b> Start</span><span><b>G</b> Destination</span><span><b>K</b> Pickup</span><span><b>D</b> Locked door</span><span><b>w</b> Cost 5</span><span><b>#</b> Wall</span></div>
+        <div class="narration" aria-live="polite"><strong id="stepTitle"></strong><p id="stepExplanation"></p><div class="step-facts"><span id="position"></span><span id="pickup"></span><span id="currentCost"></span></div></div>
+        <p class="small subtle keyboard">Space: play/pause · Left/Right: step · Home/End: first/last (when not editing a control)</p>
+      </section>
+      <aside>
+        <section class="panel comparison"><h2>Compare this map</h2><p class="subtle small">Each row is a recorded run. Select View to replay it.</p><label class="filter">Show<select id="resultFilter" aria-label="Comparison results"><option value="all">All runs</option><option value="failed">Issues only</option></select></label><div class="table-scroll"><table><thead><tr><th>Algorithm</th><th>Result</th><th>Cost</th><th>Expanded</th><th><span class="sr-only">Open run</span></th></tr></thead><tbody id="results"></tbody></table></div><p id="noComparison" class="empty small" hidden>No issues on this map.</p><p id="recordingCount" class="subtle small"></p></section>
+        <section id="diagnostic" class="panel diagnostic" hidden><h2>What needs attention?</h2><p id="errorSummary"></p><p id="nextStep"></p><details><summary>Full diagnostic</summary><pre id="errorDetails"></pre></details></section>
+        <details class="panel technical"><summary>Details and limitations</summary><dl><dt>Recorded runtime</dt><dd id="runtime"></dd><dt>Validation</dt><dd id="validation"></dd></dl><p class="small subtle">Local replay uses your model and published facts. It is not independent proof of every world rule or a final grade. A custom map is marked Local only. Compare timings cautiously: expansion count is not the same as runtime.</p><p class="small subtle">This is a saved replay, not a live search. Expansions and route metrics are captured automatically; no student logging is required.</p></details>
+      </aside>
+    </div>
+  </section>
+  <footer>Offline replay · No account or server · Local diagnostics are not the final grade</footer>
+</main>
+<script type="application/json" id="records">__PAYLOAD__</script>
+<script>__SCRIPT__</script>
+</body>
+</html>

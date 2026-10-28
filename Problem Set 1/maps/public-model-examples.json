@@ -1,0 +1,1481 @@
+[
+  {
+    "rows": [
+      "SwwwwwG",
+      ".#.#.D.",
+      "...#...",
+      ".#K....",
+      "......."
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 5
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 5
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": false
+            },
+            "cost": 5
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN"
+        ],
+        "state": {
+          "row": 1,
+          "column": 2,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 5
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 2,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN"
+        ],
+        "state": {
+          "row": 2,
+          "column": 2,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 1,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 3,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 2,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN"
+        ],
+        "state": {
+          "row": 3,
+          "column": 2,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 2,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 3,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 4,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN",
+          "UP"
+        ],
+        "state": {
+          "row": 2,
+          "column": 2,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 1,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 3,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 2,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP"
+        ],
+        "state": {
+          "row": 1,
+          "column": 2,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 5
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 2,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "UP"
+        ],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 5
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "UP",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 3,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 4,
+              "has_key": true
+            },
+            "cost": 5
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "UP",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 4,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 5,
+              "has_key": true
+            },
+            "cost": 5
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 4,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "UP",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 5,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 6,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 5,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 4,
+              "has_key": true
+            },
+            "cost": 5
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "DOWN",
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "UP",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 6,
+          "has_key": true
+        },
+        "is_goal": true,
+        "transitions": []
+      }
+    ]
+  },
+  {
+    "rows": [
+      "SG.K"
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 3,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "RIGHT",
+          "LEFT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT",
+          "RIGHT",
+          "LEFT",
+          "LEFT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": true
+        },
+        "is_goal": true,
+        "transitions": []
+      }
+    ]
+  },
+  {
+    "rows": [
+      "K.SDG"
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "LEFT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "LEFT",
+          "LEFT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "LEFT",
+          "LEFT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "LEFT",
+          "LEFT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "LEFT",
+          "LEFT",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 3,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 4,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "LEFT",
+          "LEFT",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 4,
+          "has_key": true
+        },
+        "is_goal": true,
+        "transitions": []
+      }
+    ]
+  },
+  {
+    "rows": [
+      "SDKG"
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": []
+      }
+    ]
+  },
+  {
+    "rows": [
+      "S.",
+      ".G"
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "DOWN"
+        ],
+        "state": {
+          "row": 1,
+          "column": 1,
+          "has_key": false
+        },
+        "is_goal": true,
+        "transitions": []
+      }
+    ]
+  },
+  {
+    "rows": [
+      "S#G"
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": []
+      }
+    ]
+  },
+  {
+    "rows": [
+      "SwG",
+      "..."
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 5
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": false
+        },
+        "is_goal": true,
+        "transitions": []
+      }
+    ]
+  },
+  {
+    "rows": [
+      "S....G",
+      "......",
+      "K....."
+    ],
+    "examples": [
+      {
+        "prefix": [],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN"
+        ],
+        "state": {
+          "row": 1,
+          "column": 0,
+          "has_key": false
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 1,
+              "column": 1,
+              "has_key": false
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 2,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN"
+        ],
+        "state": {
+          "row": 2,
+          "column": 0,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 1,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 2,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN",
+          "UP"
+        ],
+        "state": {
+          "row": 1,
+          "column": 0,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "UP",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 1,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 2,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP"
+        ],
+        "state": {
+          "row": 0,
+          "column": 0,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 1,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 0,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 2,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 1,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 3,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 4,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 2,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 4,
+          "has_key": true
+        },
+        "is_goal": false,
+        "transitions": [
+          {
+            "action": "RIGHT",
+            "state": {
+              "row": 0,
+              "column": 5,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "DOWN",
+            "state": {
+              "row": 1,
+              "column": 4,
+              "has_key": true
+            },
+            "cost": 1
+          },
+          {
+            "action": "LEFT",
+            "state": {
+              "row": 0,
+              "column": 3,
+              "has_key": true
+            },
+            "cost": 1
+          }
+        ]
+      },
+      {
+        "prefix": [
+          "DOWN",
+          "DOWN",
+          "UP",
+          "UP",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT",
+          "RIGHT"
+        ],
+        "state": {
+          "row": 0,
+          "column": 5,
+          "has_key": true
+        },
+        "is_goal": true,
+        "transitions": []
+      }
+    ]
+  }
+]
