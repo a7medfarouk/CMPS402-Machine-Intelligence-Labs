@@ -86,7 +86,6 @@ def UniformCostSearch(problem, initial_state):
                 order += 1                                      
                 heapq.heappush(frontier, (child.cost, order, child))
                 in_frontier[child.state] = child
-
     return None
 
 
@@ -127,7 +126,36 @@ def AStarSearch(problem, initial_state, heuristic):
 
 
 def BestFirstSearch(problem, initial_state, heuristic):
-    raise NotImplementedError("Implement greedy best-first search")
+    node = Node(initial_state)                      
+    order = 0                                       
+    frontier = [(node.cost, order, node)]           
+    in_frontier = {node.state: node}                
+    explored = set()                                
+
+    while in_frontier:                              
+        while (node := heapq.heappop(frontier)[2]) is not in_frontier.get(node.state):
+            pass                                    
+        del in_frontier[node.state]
+        if problem.is_goal(node.state):            
+            return reconstruct(node)
+        explored.add(node.state)                    
+
+        for action in problem.get_actions(node.state):          
+            child = Node(                                       
+                problem.get_successor(node.state, action),
+                heuristic(problem, problem.get_successor(node.state, action)),
+                node,
+                action,
+            )
+            if child.state not in explored and child.state not in in_frontier:
+                order += 1
+                heapq.heappush(frontier, (child.cost, order, child))
+                in_frontier[child.state] = child
+            elif child.state in in_frontier and in_frontier[child.state].cost > child.cost:
+                order += 1                                      
+                heapq.heappush(frontier, (child.cost, order, child))
+                in_frontier[child.state] = child
+    return None
 
 
 def solve(problem, algorithm="astar", heuristic=None):
