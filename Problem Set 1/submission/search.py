@@ -64,7 +64,7 @@ def UniformCostSearch(problem, initial_state):
     explored = set()                                
 
     while in_frontier:                              
-        while (node := heapq.heappop(frontier)[2]) is not in_frontier.get(node.state):
+        while (node := heapq.heappop(frontier)[2]).state in explored:
             pass                                    
         del in_frontier[node.state]
         if problem.is_goal(node.state):            
@@ -98,7 +98,7 @@ def AStarSearch(problem, initial_state, heuristic):
     explored = set()                                
 
     while in_frontier:                              
-        while (node := heapq.heappop(frontier)[2]) is not in_frontier.get(node.state):
+        while (node := heapq.heappop(frontier)[2]).state in explored:
             pass                                    
         del in_frontier[node.state]
         if problem.is_goal(node.state):            
@@ -118,6 +118,7 @@ def AStarSearch(problem, initial_state, heuristic):
                 heapq.heappush(frontier, (child.cost + child_heuristic, order, child))
                 in_frontier[child.state] = child
             elif child.state in in_frontier and in_frontier[child.state].cost > child.cost:
+                order += 1
                 child_heuristic = heuristic(problem, child.state)
                 heapq.heappush(frontier, (child.cost + child_heuristic, order, child))
                 in_frontier[child.state] = child
@@ -133,7 +134,7 @@ def BestFirstSearch(problem, initial_state, heuristic):
     explored = set()                                
 
     while in_frontier:                              
-        while (node := heapq.heappop(frontier)[2]) is not in_frontier.get(node.state):
+        while (node := heapq.heappop(frontier)[2]).state in explored:
             pass                                    
         del in_frontier[node.state]
         if problem.is_goal(node.state):            
