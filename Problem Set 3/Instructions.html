@@ -1,0 +1,167 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CMPS402 Adversarial Search</title><style>
+    :root{font:16px/1.65 'Segoe UI',Arial,sans-serif;color:#243947;background:#f4f6f7}
+    *{box-sizing:border-box}body{margin:0}header{background:#203f4c;color:#fff;padding:16px 28px;display:flex;justify-content:space-between;gap:12px}header a{color:#fff}header span{font-size:14px}
+    .layout{display:grid;grid-template-columns:245px minmax(0,900px);max-width:1230px;margin:auto;gap:28px;padding:28px 20px}nav{position:sticky;top:20px;align-self:start;font-size:13px}nav strong{display:block;margin-bottom:8px}nav a{display:block;padding:6px 10px;border-left:2px solid #d5e0e4;text-decoration:none;color:#365864}nav a:hover{background:#e3edef;border-color:#397b80}
+    main{background:#fff;border:1px solid #d9e2e5;border-radius:10px;padding:34px 42px;min-width:0}h1{font-size:32px;line-height:1.2;color:#203f4c;margin:0 0 12px}h2{font-size:23px;line-height:1.35;margin:40px 0 14px;color:#205d66;border-top:1px solid #dce6e8;padding-top:24px;scroll-margin-top:20px}h2:first-of-type{margin-top:10px;border:0;padding-top:0}h3{font-size:17px;margin:26px 0 8px;color:#274c5d}p{margin:10px 0 14px}li{margin:7px 0}a{color:#176776}a:focus-visible{outline:3px solid #d8a63c;outline-offset:3px}code{font:13px/1.5 Consolas,monospace;background:#eef2f4;border-radius:3px;padding:1px 4px;overflow-wrap:anywhere}pre{background:#edf3f4;border:1px solid #d8e3e7;border-radius:6px;padding:13px 16px;overflow:auto}pre code{background:none;padding:0;white-space:pre;overflow-wrap:normal}table{border-collapse:collapse;width:100%;font-size:14px;margin:18px 0 24px;table-layout:fixed}th,td{text-align:left;vertical-align:top;padding:10px 12px;border:1px solid #dbe3e7;overflow-wrap:anywhere}th{background:#e6eff1;color:#264c59}tr:nth-child(even) td{background:#fafcfc}footer{text-align:center;color:#627c86;font-size:12px;margin:28px}
+    @media(max-width:900px){.layout{display:block;padding:14px}nav{position:static;margin-bottom:20px;columns:2}nav strong{column-span:all}main{padding:24px}header{padding:14px;font-size:14px}h1{font-size:27px}}
+    @media(max-width:520px){nav{columns:1}main{padding:18px}table{font-size:12px}th,td{padding:7px}header{display:block}header span{display:block;margin-top:3px}}
+    @media print{body{background:#fff}header,nav,footer{display:none}.layout{display:block;padding:0}main{padding:0;border:0}h2,h3{break-after:avoid}pre,tr{break-inside:avoid}a{color:inherit}}
+    </style></head><body><header><strong>CMPS402 · Fall 2026</strong><span>Assignment 3</span></header><div class="layout"><nav aria-label="Contents"><strong>In this guide</strong><a href="#1-get-started">1. Get started</a><a href="#2-try-the-games">2. Try the games</a><a href="#3-implement-search">3. Implement search</a><a href="#4-implement-both-evaluators">4. Implement both evaluators</a><a href="#5-run-public-checks">5. Run public checks</a><a href="#6-assessment-and-submission">6. Assessment and submission</a></nav><main><h1 id="cmps402-assignment-3-adversarial-search">CMPS402 Assignment 3: Adversarial Search</h1>
+<p>Build one search agent that can play Connect Four and Chomp.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Work</td>
+<td>Individually or in pairs</td>
+</tr>
+<tr>
+<td>Marks</td>
+<td>5 per student, plus an optional bonus of up to 1 mark</td>
+</tr>
+<tr>
+<td>Submission</td>
+<td>One Python-only ZIP per individual or pair</td>
+</tr>
+<tr>
+<td>Deadline</td>
+<td><strong>Saturday 28 November 2026 at 11:59 PM</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Late submissions will be penalized heavily. A submission up to two hours late receives a lower late penalty than a submission more than two hours late.</strong> The lower-penalty window ends on Sunday 29 November 2026 at 1:59 AM. This is not a penalty-free grace period. Start the upload early and check that it finishes successfully.</p>
+<p><strong>Plagiarism and cheating are prohibited.</strong> Work with your registered partner. Do not copy or exchange solutions with other teams, distribute your solution, or submit someone else's work as your own. Each member must understand the submitted implementation and explain its decisions.</p>
+<h2 id="1-get-started">1. Get started</h2>
+<p>Extract the student ZIP. Open a terminal in the folder containing <strong>app.py</strong> and <strong>pyproject.toml</strong>.</p>
+<p>If you need uv, follow the <a href="https://docs.astral.sh/uv/getting-started/installation/">uv installation guide</a>. On Windows with WinGet, you can run <code>winget install --id=astral-sh.uv -e</code> and reopen the terminal.</p>
+<pre><code class="language-text">uv sync --locked
+uv run --locked app.py
+</code></pre>
+<p>The project uses <strong>Python 3.14</strong>. Use Up/Down and Enter in the menu. If arrow keys are unavailable, run <code>uv run --locked app.py --plain-menu</code>.</p>
+<p>Choose <strong>Play in browser</strong>. If the browser does not open, use the address printed in the terminal. Press Ctrl+C in the terminal to stop the app. The built-in opponent is available as soon as setup is complete.</p>
+<h2 id="2-try-the-games">2. Try the games</h2>
+<p>In <strong>Play</strong>, choose <strong>Built-in opponent</strong> and <strong>Start position</strong> to try either game. In Connect Four, discs fall to the lowest empty cell and four in a line wins. In Chomp, a bite removes the chosen square and the rectangle below and to its right. Leave only the top-left square (poison) to win.</p>
+<p>To try your code before writing the evaluators, choose <strong>My agent</strong>, <strong>Minimax</strong>, and <strong>Zero baseline</strong>, then choose <strong>Start position</strong>. The Zero baseline estimates every nonterminal position at 0.</p>
+<h2 id="3-implement-search">3. Implement search</h2>
+<p>Edit <strong>submission/search.py</strong>. Use the supplied game methods so your code also works on test trees whose states may be strings.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>What it returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>game.get_turn(state)</code></td>
+<td>Player 0 (X) or player 1 (O).</td>
+</tr>
+<tr>
+<td><code>game.get_actions(state)</code></td>
+<td>The legal actions in the engine's order. Call this for a nonterminal state.</td>
+</tr>
+<tr>
+<td><code>game.get_successor(state, action)</code></td>
+<td>The next immutable state after a legal action.</td>
+</tr>
+<tr>
+<td><code>game.is_terminal(state)</code></td>
+<td><code>(False, None)</code> during play or <code>(True, (score_0, score_1))</code> at the end.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="search-functions">Search functions</h3>
+<p><code>minimax</code>, <code>alphabeta</code>, and <code>expectimax</code> return <strong><code>(value, action)</code></strong>. Keep <code>max_player</code> fixed. Each move uses one unit of depth. Check for a terminal state first and return its utility for MAX with action <code>None</code>. At depth zero on a nonterminal state, return <code>evaluate(game, state, max_player)</code> and <code>None</code>. Any genuinely optimal action is accepted on a tie.</p>
+<ul>
+<li><strong><code>minimax</code></strong> maximizes on MAX's turn and minimizes on the opponent's turn.</li>
+<li><strong><code>alphabeta</code></strong> must match the minimax value and return an optimal legal action. Prune when <code>alpha &gt;= beta</code>.</li>
+<li><strong><code>order_moves</code></strong> returns all legal actions as a list or tuple sorted by successor score. Use true utility for terminal successors and the evaluator for others. Sort highest first for MAX and lowest first for MIN, with ties in legal action order. Use it at MAX and MIN nodes when <code>ordered=True</code> and more than one ply remains. On the final ply, ordering is optional.</li>
+<li><strong><code>expectimax</code></strong> maximizes for MAX and takes the uniform mean of all replies at a chance node. At a chance root, return the mean and action <code>None</code>. This function is checked on trees.</li>
+</ul>
+<h2 id="4-implement-both-evaluators">4. Implement both evaluators</h2>
+<p>Edit <strong>submission/evaluation.py</strong>. Both functions estimate <strong>nonterminal</strong> positions. Think of <code>max_player</code> as the player you are scoring for and <code>game.get_turn(state)</code> as the player who moves next. If MAX is X, an O threat should lower X's score even on X's turn. Pick your own weights and return a finite score strictly between <strong>-1000 and 1000</strong>. Search scores finished games.</p>
+<h3 id="connect-four">Connect Four</h3>
+<p><strong>Read the board.</strong> On the 6-by-7 board, <code>state.board[row][column]</code> is <code>None</code> for empty, <code>0</code> for X, and <code>1</code> for O. Row 0 is the top and row 5 is the bottom. Each entry in <code>game.lines</code> gives four <code>(row, column)</code> coordinates, including horizontal, vertical, and diagonal lines.</p>
+<p><strong>Score the threats.</strong> In <code>evaluate_connect_four</code>, read the four cells in a line. Three discs of one color and an empty fourth cell form a threat. A disc can land in the gap now if it is on row 5 or has a disc directly below it. Give playable threats more weight. You may give unsupported threats zero weight. MAX's weighted threats raise the score and the opponent's lower it.</p>
+<p><strong>Example.</strong> Two X threats, viewed from the bottom of the board. <code>*</code> is the gap being scored.</p>
+<pre><code class="language-text">                 Playable        Needs setup
+Above bottom     . . . .         X X X *
+Bottom row       X X X *         O X O .
+</code></pre>
+<p>The left gap fills with one drop. On the right, the disc lands below the gap. The left threat is stronger for X. Browser columns are labeled 1-7 and Python columns are 0-6.</p>
+<h3 id="chomp">Chomp</h3>
+<p><strong>Read the board.</strong> <code>state.board</code> lists row lengths from top to bottom. A horizontal three-square strip is <code>(3, 0, 0)</code>. Its vertical counterpart is <code>(1, 1, 1)</code>. A bite selects a remaining square by its zero-based <code>(row, column)</code> coordinates.</p>
+<p><strong>Score the shapes.</strong> In <code>evaluate_chomp</code>, give a strong advantage to the next player if they can win in one bite. Biting <code>(0, 1)</code> on the horizontal strip leaves only poison. The same bite on the corner <code>(2, 1, 0)</code> leaves <code>(1, 1, 0)</code>, so the opponent can win next. Every legal bite on the corner has that drawback. A shape with a bite that avoids immediate loss should score better for the player to move than this corner.</p>
+<table>
+<thead>
+<tr>
+<th>Next to move, with MAX fixed as player 0</th>
+<th>Which shape should score higher for MAX?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Player 0 (MAX)</td>
+<td>Strip. MAX has the winning bite.</td>
+</tr>
+<tr>
+<td>Player 1 (MIN)</td>
+<td>Corner. MIN has to give MAX the winning bite.</td>
+</tr>
+</tbody>
+</table>
+<p>Try <strong>One strip</strong> and <strong>The corner trap</strong> in <strong>Play</strong> to see the difference.</p>
+<h2 id="5-run-public-checks">5. Run public checks</h2>
+<p>Choose <strong>Run public checks</strong> for the 13 required checks. From the results you can retry failures or choose one check. <strong>NOT IMPLEMENTED</strong> means a function is still a starter stub.</p>
+<p>The alpha-beta check verifies that search skips branches. <strong>Compare</strong> shows work counts and elapsed time. Search values are from the perspective of the player to move.</p>
+<pre><code class="language-text">uv run --locked app.py check
+uv run --locked app.py check --case expectimax-average
+</code></pre>
+<h2 id="6-assessment-and-submission">6. Assessment and submission</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th style="text-align:right">Marks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shared code</td>
+<td style="text-align:right">3.00</td>
+</tr>
+<tr>
+<td>Individual explanation</td>
+<td style="text-align:right">1.00</td>
+</tr>
+<tr>
+<td>Individual application</td>
+<td style="text-align:right">1.00</td>
+</tr>
+<tr>
+<td><strong>Base total</strong></td>
+<td style="text-align:right"><strong>5.00</strong></td>
+</tr>
+<tr>
+<td>Chomp endgame bonus</td>
+<td style="text-align:right">1.00</td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-bonus-exact-chomp-endgames">Optional bonus: exact Chomp endgames</h3>
+<p>Implement <strong><code>solve_chomp_endgame(game, state, max_player=0)</code></strong> in <strong>submission/search.py</strong>. Return the exact utility for MAX and an optimal legal bite for the side to move. At a terminal board, return the utility and <code>None</code>. Positions have up to 16 squares including poison.</p>
+<p>Choose <strong>Chomp bonus</strong> on the main menu or run <code>uv run --locked app.py check --case chomp-endgame</code>.</p>
+<h3 id="submission-steps">Submission steps</h3>
+<ol>
+<li>Finish <strong>submission/search.py</strong> and <strong>submission/evaluation.py</strong>. Keep any Python helpers inside <strong>submission/</strong>.</li>
+<li>Choose <strong>Submit &gt; Enter member details</strong> and select one or two students. For the command-line workflow, you can enter the details in the literal <strong>MEMBERS</strong> list in <strong>submission/student_info.py</strong>.</li>
+<li>Re-run the public checks. Choose <strong>Submit &gt; Build the Python-only ZIP</strong>, or run <code>uv run --locked app.py submit</code>.</li>
+<li>Open the generated ZIP under <strong>output/submissions/</strong>. Verify <strong>Name_ID.zip</strong> for one member or <strong>Name1_ID1__Name2_ID2.zip</strong> for a pair. It should contain only Python files under <strong>submission/</strong>.</li>
+<li>Upload one ZIP to Google Classroom before the deadline. For pairs, only one member uploads.</li>
+</ol>
+</main></div></body></html>

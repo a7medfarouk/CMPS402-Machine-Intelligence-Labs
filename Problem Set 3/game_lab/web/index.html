@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adversarial Search | CMPS402</title>
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/play.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap heading">
+      <div><p class="course">CMPS402 · Assignment 3</p><h1>Adversarial Search</h1></div>
+      <div class="guide-links"><a href="/instructions">Instructions</a><a href="/instructions.pdf">PDF</a></div>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="view-bar">
+      <nav class="views" aria-label="Game modes">
+        <button id="go-play" aria-pressed="true" aria-controls="play-view">Play</button>
+        <button id="go-compare" aria-pressed="false" aria-controls="compare-view">Compare</button>
+      </nav>
+      <div class="buttons"><button id="copy-position">Copy position</button><button id="load-position">Load position</button></div>
+    </div>
+    <div id="play-view" class="play-layout">
+      <section class="panel play-board" aria-labelledby="game-title">
+        <div class="board-head">
+          <div><h2 id="game-title">Connect Four</h2><p id="position-name" class="muted"></p></div>
+          <p id="status" role="status">Loading position…</p>
+        </div>
+        <p id="rules" class="rules"></p>
+        <div id="board" aria-label="Game board"></div>
+        <div class="board-footer">
+          <p id="players" class="muted"></p>
+          <div class="buttons"><button id="undo">Undo turn</button><button id="reset">Reset board</button></div>
+        </div>
+        <button id="resume" hidden>Continue agent turn</button>
+      </section>
+      <aside class="side">
+        <section class="panel" aria-labelledby="settings-heading">
+          <h2 id="settings-heading">Set up a position</h2>
+          <div class="game-picker" role="group" aria-label="Game">
+            <button id="select-connect-four" aria-pressed="true">Connect Four</button>
+            <button id="select-chomp" aria-pressed="false">Chomp</button>
+          </div>
+          <div class="fields">
+            <label class="wide">Starting position<select id="preset"></select></label>
+            <p id="preset-hint" class="muted wide"></p>
+            <label>Opponent<select id="agent"><option value="baseline">Built-in opponent</option><option value="student">My agent</option></select></label>
+            <label>Who moves next?<select id="first"><option value="human">I move next</option><option value="agent">Agent moves next</option></select></label>
+          </div>
+          <fieldset id="agent-options" hidden>
+            <legend>My agent settings</legend>
+            <div class="fields">
+              <label>Search<select id="method"><option value="alphabeta">Alpha-beta</option><option value="ordered">Ordered alpha-beta</option><option value="minimax">Minimax</option></select></label>
+              <label>Depth in moves<select id="depth"><option>1</option><option>2</option><option selected>3</option><option>4</option></select></label>
+              <label class="wide">Evaluator<select id="evaluation"><option value="zero">Zero baseline</option><option value="student">My evaluator</option></select></label>
+            </div>
+          </fieldset>
+          <p id="setup-note" class="muted"></p>
+          <button class="primary" id="start">Start position</button>
+        </section>
+        <section class="panel move-panel" aria-labelledby="last-title">
+          <h2 id="last-title">Agent’s last move</h2>
+          <div id="last" aria-live="polite">Play a turn to see the reply.</div>
+        </section>
+      </aside>
+    </div>
+    <section id="compare-view" class="panel compare-panel" aria-labelledby="compare-title" hidden>
+      <div class="compare-head">
+        <div><h2 id="compare-title">Compare your searches</h2>
+          <p>Run your three search modes on the current board with the same depth and evaluator.</p></div>
+        <button id="back-play">Back to board</button>
+      </div>
+      <details class="worked-comparison" open>
+        <summary>Worked comparison</summary>
+        <p class="muted" id="worked-settings">Connect Four · Compare move ordering · Depth 4 · Reference evaluator</p>
+        <p>All three searches choose <strong>column 4</strong> and return a value of <strong>11 for X</strong>.</p>
+        <div class="scroll" role="region" aria-label="Worked comparison results" tabindex="0">
+          <table aria-describedby="worked-settings">
+            <thead>
+              <tr><th scope="col">Search</th><th scope="col">Terminal checks</th><th scope="col">Successor calls</th><th scope="col">Evaluator calls</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Minimax</th><td>2,675</td><td>2,674</td><td>2,241</td></tr>
+              <tr><th scope="row">Alpha-beta</th><td>1,263</td><td>1,262</td><td>956</td></tr>
+              <tr><th scope="row">Ordered alpha-beta</th><td>389</td><td>388</td><td>285</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Here, move ordering finds useful bounds earlier and cuts successor calls from 1,262 to 388. This run skips ordering on the final ply. With a different board, depth, or evaluator, scoring moves for ordering can cost more calls than it saves.</p>
+      </details>
+      <p class="position-summary" id="compare-position"></p>
+      <div class="compare-controls">
+        <label>Depth in moves<select id="compare-depth"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
+        <label>Evaluator<select id="compare-evaluation"><option value="zero">Zero baseline</option><option value="student">My evaluator</option></select></label>
+        <button class="primary" id="compare">Run comparison</button>
+      </div>
+      <p class="muted">Each search gets up to 8 seconds. If one fails, the other results still appear.</p>
+      <div id="comparison"></div>
+      <details class="metrics-help">
+        <summary>What do these counts mean?</summary>
+        <dl>
+          <div><dt>Terminal checks</dt><dd>Calls that ask whether the game has finished.</dd></div>
+          <div><dt>Successor calls</dt><dd>Calls that create a child position after a legal move.</dd></div>
+          <div><dt>Evaluator calls</dt><dd>Estimates for nonterminal positions, including estimates used to order moves.</dd></div>
+        </dl>
+        <p>The counters show calls made by the search and move ordering. Elapsed time also includes work inside the evaluator.</p>
+      </details>
+    </section>
+  </main>
+  <dialog id="replay-dialog" aria-labelledby="replay-title">
+    <h2 id="replay-title">Position code</h2>
+    <p id="replay-help" class="muted"></p>
+    <label for="replay-code">Position code</label>
+    <textarea id="replay-code" rows="5" maxlength="4096" spellcheck="false"></textarea>
+    <p id="replay-status" role="status"></p>
+    <div class="buttons"><button id="replay-close">Close</button><button id="replay-apply" class="primary">Load position</button></div>
+  </dialog>
+</body>
+</html>
