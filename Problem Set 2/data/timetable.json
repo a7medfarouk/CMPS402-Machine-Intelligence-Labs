@@ -1,0 +1,39 @@
+{
+  "days": ["Sun", "Mon", "Tue", "Wed", "Thu"],
+  "course_names": {
+    "CMPS402": "Machine Intelligence",
+    "CMPS202": "Introduction to Database Management Systems",
+    "CMPS303": "Operating Systems",
+    "EECS102": "Circuits 1",
+    "MTHS102": "Linear Algebra and Multivariable Integrals",
+    "MTHS104": "Differential Equations"
+  },
+  "components": {
+    "CMPS402.lecture": {"L1": ["Mon", "09:00", "11:00"], "L2": ["Tue", "09:00", "11:00"]},
+    "CMPS402.tutorial": {"T1": ["Wed", "11:00", "12:30"], "T2": ["Wed", "13:00", "14:30"], "T3": ["Tue", "10:00", "11:30"], "T4": ["Thu", "13:00", "14:30"]},
+    "CMPS202.lecture": {"L1": ["Sun", "09:00", "11:00"], "L2": ["Mon", "11:00", "13:00"]},
+    "CMPS202.tutorial": {"T1": ["Sun", "11:00", "13:00"], "T2": ["Thu", "09:00", "11:00"]},
+    "CMPS303.lecture": {"L1": ["Wed", "09:00", "11:00"], "L2": ["Sun", "13:00", "15:00"]},
+    "CMPS303.tutorial": {"T1": ["Tue", "11:00", "13:00"], "T2": ["Thu", "11:30", "13:30"]},
+    "EECS102.lecture": {"L1": ["Sun", "11:00", "13:00"], "L2": ["Sun", "13:00", "15:00"]},
+    "EECS102.tutorial": {"T1": ["Sun", "13:00", "15:00"], "T2": ["Tue", "13:00", "15:00"], "T3": ["Mon", "15:00", "17:00"]},
+    "MTHS102.lecture": {"L1": ["Mon", "09:30", "11:30"], "L2": ["Thu", "09:30", "11:30"]},
+    "MTHS102.tutorial": {"T1": ["Wed", "09:00", "11:00"], "T2": ["Wed", "13:00", "15:00"]},
+    "MTHS104.lecture": {"L1": ["Sun", "09:00", "11:00"], "L2": ["Tue", "11:00", "13:00"]},
+    "MTHS104.tutorial": {"T1": ["Mon", "13:00", "15:00"], "T2": ["Thu", "09:00", "11:00"]}
+  },
+  "links": [
+    {"components": ["MTHS102.tutorial", "MTHS102.lecture"], "allowed": [["T1", "L1"], ["T2", "L2"]]},
+    {"components": ["MTHS104.lecture", "MTHS104.tutorial"], "allowed": [["L1", "T1"], ["L2", "T2"]]}
+  ],
+  "requests": {
+    "alternatives": {"courses": ["CMPS402", "CMPS202", "CMPS303", "EECS102", "MTHS102", "MTHS104"]},
+    "linked": {"courses": ["MTHS102"]},
+    "forced": {"courses": ["CMPS402", "MTHS102"], "unavailable": [["Thu", "09:30", "11:30"]]},
+    "blocked": {"courses": ["CMPS402", "MTHS102"], "unavailable": [["Thu", "09:30", "11:30"], ["Tue", "09:00", "11:00"]]},
+    "week": {"courses": ["CMPS402", "CMPS202", "CMPS303", "EECS102", "MTHS102"]},
+    "packed": {"courses": ["CMPS402", "CMPS202", "CMPS303", "EECS102", "MTHS102", "MTHS104"], "unavailable": [["Sun", "14:45", "15:00"]]},
+    "single-course": {"courses": ["CMPS402"]},
+    "empty": {"courses": []}
+  }
+}

@@ -1,0 +1,353 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CMPS402 Scheduling Advisor</title><style>
+    :root{font:16px/1.65 'Segoe UI',Arial,sans-serif;color:#243947;background:#f4f6f7}
+    *{box-sizing:border-box}body{margin:0}header{background:#203f4c;color:#fff;padding:16px 28px;display:flex;justify-content:space-between;gap:12px}header a{color:#fff}header span{font-size:14px}
+    .layout{display:grid;grid-template-columns:245px minmax(0,900px);max-width:1230px;margin:auto;gap:28px;padding:28px 20px}nav{position:sticky;top:20px;align-self:start;font-size:13px}nav strong{display:block;margin-bottom:8px}nav a{display:block;padding:6px 10px;border-left:2px solid #d5e0e4;text-decoration:none;color:#365864}nav a:hover{background:#e3edef;border-color:#397b80}
+    main{background:#fff;border:1px solid #d9e2e5;border-radius:10px;padding:34px 42px;min-width:0}h1{font-size:32px;line-height:1.2;color:#203f4c;margin:0 0 12px}h2{font-size:23px;line-height:1.35;margin:40px 0 14px;color:#205d66;border-top:1px solid #dce6e8;padding-top:24px;scroll-margin-top:20px}h2:first-of-type{margin-top:10px;border:0;padding-top:0}h3{font-size:17px;margin:26px 0 8px;color:#274c5d}p{margin:10px 0 14px}li{margin:7px 0}a{color:#176776}a:focus-visible{outline:3px solid #d8a63c;outline-offset:3px}code{font:13px/1.5 Consolas,monospace;background:#eef2f4;border-radius:3px;padding:1px 4px;overflow-wrap:anywhere}pre{background:#edf3f4;border:1px solid #d8e3e7;border-radius:6px;padding:13px 16px;overflow:auto}pre code{background:none;padding:0;white-space:pre;overflow-wrap:normal}table{border-collapse:collapse;width:100%;font-size:14px;margin:18px 0 24px;table-layout:fixed}th,td{text-align:left;vertical-align:top;padding:10px 12px;border:1px solid #dbe3e7;overflow-wrap:anywhere}th{background:#e6eff1;color:#264c59}tr:nth-child(even) td{background:#fafcfc}footer{text-align:center;color:#627c86;font-size:12px;margin:28px}
+    @media(max-width:900px){.layout{display:block;padding:14px}nav{position:static;margin-bottom:20px;columns:2}nav strong{column-span:all}main{padding:24px}header{padding:14px;font-size:14px}h1{font-size:27px}}
+    @media(max-width:520px){nav{columns:1}main{padding:18px}table{font-size:12px}th,td{padding:7px}header{display:block}}
+    @media print{body{background:#fff}header,nav,footer{display:none}.layout{display:block;padding:0}main{padding:0;border:0}h2,h3{break-after:avoid}pre,tr{break-inside:avoid}a{color:inherit}}
+    </style></head><body><header><strong>CMPS402 · Fall 2026</strong><span>Assignment 2</span></header><div class="layout"><nav aria-label="Contents"><strong>In this guide</strong><a href="#1-get-started">1. Get started</a><a href="#2-timetable-rules">2. Timetable rules</a><a href="#3-implement-the-model">3. Implement the model</a><a href="#4-implement-a-generic-solver">4. Implement a generic solver</a><a href="#5-implement-the-advisor">5. Implement the advisor</a><a href="#6-run-check-and-investigate">6. Run, check, and investigate</a><a href="#7-assessment-and-discussion">7. Assessment and discussion</a><a href="#8-submit">8. Submit</a></nav><main><h1 id="cmps402-assignment-2-scheduling-advisor">CMPS402 Assignment 2: Scheduling Advisor</h1>
+<p>Find a conflict-free timetable, then answer questions about alternatives: <em>Can I take this tutorial? Can I avoid Tuesday? Is this section unavoidable?</em></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Work</td>
+<td>Individually or in pairs</td>
+</tr>
+<tr>
+<td>Marks</td>
+<td>8 per student: 4 shared code + 2 individual explanation + 2 individual application</td>
+</tr>
+<tr>
+<td>Submission</td>
+<td>One Python-only ZIP per individual or pair</td>
+</tr>
+<tr>
+<td>Deadline</td>
+<td><strong>Sunday 22 November 2026 at 11:59 PM</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-get-started">1. Get started</h2>
+<p>Extract the ZIP into its own folder. Open a terminal in the folder containing <strong>app.py</strong> and <strong>pyproject.toml</strong>, not inside submission/.</p>
+<p>If uv is not installed, use the <a href="https://docs.astral.sh/uv/getting-started/installation/">official uv installation guide</a>. On Windows with WinGet you can run the following, then reopen your terminal:</p>
+<pre><code class="language-powershell">winget install --id=astral-sh.uv -e
+</code></pre>
+<p>Run:</p>
+<pre><code class="language-text">uv --version
+uv sync --locked
+uv run --locked app.py setup-check
+uv run --locked app.py
+</code></pre>
+<p>The locked project uses <strong>Python 3.14</strong>. uv may download it and the dependencies on first setup. Do not change the Python version or lockfile. The terminal app uses Rich and Questionary. Your submitted algorithms use Python and the supplied interfaces, not external CSP or optimization solvers.</p>
+<p>Use Up/Down and Enter in the menu. Use Back to leave a submenu or Ctrl+C to cancel an action. If arrow input does not work, use <strong>uv run --locked app.py --plain-menu</strong>. The numbered menu also works in restricted terminals.</p>
+<p>Start with <strong>Start here &gt; Open the offline walkthrough</strong>, or open <a href="examples/Walkthrough.html">Walkthrough.html</a> in the examples folder. It runs before you write code. Follow the four steps below:</p>
+<ol>
+<li><strong>Understand the choices.</strong> Find CMPS402 T1 in the starting timetable, then open the T4 and Tuesday examples. Inspect the available sections and links in <strong>Try your advisor &gt; View sections, links and blocked times</strong>.</li>
+<li><strong>Build the model.</strong> Edit model.py and run <strong>Implement and test &gt; model.py</strong>.</li>
+<li><strong>Build the solver.</strong> Edit solver.py and run its checks on small generic CSPs. Use <strong>Implement and test &gt; AC-3 unit checks</strong> to try arc consistency on its own.</li>
+<li><strong>Answer advisor questions.</strong> Edit advisor.py and run its checks. They supply a fake solve callback, so you can debug it separately. Then try the whole app. <strong>NOT IMPLEMENTED</strong> is normal for untouched functions; re-run all, failed, or selected checks after editing.</li>
+</ol>
+<h2 id="2-timetable-rules">2. Timetable rules</h2>
+<p>A request includes every listed component of each requested course; some courses have no tutorial or lab.</p>
+<ul>
+<li>Select one section per requested component. Each section has <strong>exactly one</strong> weekly slot: one day, one start and one end.</li>
+<li>Two intervals clash if they are on the same declared day and overlap. Endpoints touch without a clash: 09:00-10:00 and 10:00-11:00 can coexist. Meetings are stored in minutes from midnight.</li>
+<li>No two selected slots may clash, even for components of the same course. Identical slots for two selected components clash too. A selected slot may not overlap an unavailable interval.</li>
+<li>The timetable is fixed. Do not optimize gaps, travel, or the number of days. Any valid schedule is accepted.</li>
+</ul>
+<h3 id="links">Links</h3>
+<p><strong>No link means no pairing restriction.</strong> In this catalogue, CMPS and EECS courses have no section links. For example, CMPS402 lecture L1 and tutorial T4 can be taken together. EECS102 has lectures and tutorials only; their section numbers do not have to match. Time clashes and unavailable intervals still apply: CMPS402 L2 and T3 are unlinked but overlap on Tuesday.</p>
+<p><strong>A present link is an allow-list.</strong> For MTHS102 and MTHS104 in this catalogue, L1 must go with T1 and L2 with T2. For MTHS102, the link is written <strong>tutorial first</strong>: (T1, L1) and (T2, L2). Read the endpoint names from the record; do not sort them or match section suffixes in your code. A present link with an empty allow-list forbids all pairings. A missing link permits all pairings as far as linking is concerned. Ignore a link when either endpoint is not requested.</p>
+<h2 id="3-implement-the-model">3. Implement the model</h2>
+<h3 id="from-a-course-request-to-component-variables">From a course request to component variables</h3>
+<p>The JSON request names courses, not sections. The supplied loader expands the courses into their listed components <strong>before</strong> calling build_problem. For example:</p>
+<pre><code class="language-text">JSON: {&quot;courses&quot;: [&quot;CMPS402&quot;], &quot;unavailable&quot;: []}
+request.components: (&quot;CMPS402.lecture&quot;, &quot;CMPS402.tutorial&quot;)
+request.unavailable: ()
+domains: {&quot;CMPS402.lecture&quot;: {&quot;L1&quot;, &quot;L2&quot;},
+          &quot;CMPS402.tutorial&quot;: {&quot;T1&quot;, &quot;T2&quot;, &quot;T3&quot;, &quot;T4&quot;}}
+</code></pre>
+<p>One variable per component lets you choose a lecture and a tutorial independently, then link only the pairs that need it. Using one variable per whole course would make each value a bundle of several sections. That would hide the individual choices you need for clash checks and what-if queries. You do not write the JSON parser or expand courses yourself.</p>
+<h3 id="the-records-you-receive">The records you receive</h3>
+<table>
+<thead>
+<tr>
+<th>Record</th>
+<th>Fields and types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Catalogue</td>
+<td><code>days: tuple[str, ...]</code>; <code>sections: Mapping[str, tuple[Section, ...]]</code>; <code>links: tuple[Link, ...]</code>; <code>course_names: Mapping[str, str]</code> (display only).</td>
+</tr>
+<tr>
+<td>Request</td>
+<td><code>components: tuple[str, ...]</code> in catalogue order; <code>unavailable: tuple[Meeting, ...]</code>.</td>
+</tr>
+<tr>
+<td>Section</td>
+<td><code>identifier: str</code> (for example L1); <code>meeting: Meeting</code> (singular).</td>
+</tr>
+<tr>
+<td>Meeting</td>
+<td><code>day: str</code>; <code>start: int</code>; <code>end: int</code>. For example, 09:00 is 540 minutes.</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><code>components: tuple[str, str]</code> in declared order; <code>allowed: frozenset[tuple[str, str]]</code> with one ID per endpoint.</td>
+</tr>
+<tr>
+<td>Problem</td>
+<td><code>variables: tuple[str, ...]</code>; <code>domains: dict[str, set]</code>; <code>constraints: list[UnaryConstraint or BinaryConstraint]</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>catalogue.sections[component]</code> to get Section objects. Use <strong>section.identifier</strong>, not the Section object, in a domain or assignment. Use <strong>section.meeting</strong> when looking up its slot. IDs are scoped to a component, so L1 can occur in multiple courses.</p>
+<h3 id="implement-two-functions-in-model-py">Implement two functions in model.py</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>What to return</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>build_domains</td>
+<td>A fresh set of all section IDs for each requested component, before unary filtering.</td>
+</tr>
+<tr>
+<td>add_constraints(problem, catalogue, request)</td>
+<td>Append constraint objects to problem.constraints and return None. Decide how to encode the timetable rules from Section 2. Do not assign sections, prune domains, or solve the problem here.</td>
+</tr>
+</tbody>
+</table>
+<p>The starter's <strong>build_problem(catalogue, request)</strong> calls these functions to create a fresh Problem. Leave that wiring in place. The modeling decisions and any helper functions inside <strong>add_constraints</strong> are yours. Do not hard-code the bundled timetable or infer a rule from a course prefix.</p>
+<p>Test domains first. The constraint checks supply their own domains so you can test <strong>add_constraints</strong> independently.</p>
+<h3 id="a-predicate-is-a-function-the-solver-calls-later">A predicate is a function the solver calls later</h3>
+<p>This example is about colors, not timetables:</p>
+<pre><code class="language-python">not_red = UnaryConstraint(&quot;X&quot;, lambda color: color != &quot;red&quot;)
+different = BinaryConstraint((&quot;Y&quot;, &quot;X&quot;), lambda first, second: first != second)
+not_red.condition(&quot;blue&quot;)                  # True
+different.is_satisfied({&quot;X&quot;: &quot;blue&quot;, &quot;Y&quot;: &quot;green&quot;})  # True
+</code></pre>
+<p>The constraint stores a callable, <strong>not</strong> a True/False result from the builder. The solver later supplies trial values. A binary rule receives values in its own endpoint order, regardless of the order in the assignment dictionary. Do not test a binary rule against a partial assignment unless both of its endpoints are assigned.</p>
+<h2 id="4-implement-a-generic-solver">4. Implement a generic solver</h2>
+<h3 id="4-1-backtracking-with-heuristics">4.1: Backtracking with heuristics</h3>
+<p>Complete <strong>submission/solver.py</strong>. The same implementation must work on timetable and small non-timetable CSPs.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Required behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>one_consistency(problem)</td>
+<td>Filter each unary constraint into its domain, remove unary constraints, keep binary constraints, and return whether every domain is nonempty.</td>
+</tr>
+<tr>
+<td>minimum_remaining_values(problem, domains)</td>
+<td>Select an unassigned variable with the smallest current domain. Break ties by problem.variables order.</td>
+</tr>
+<tr>
+<td>least_constraining_values(problem, variable, domains)</td>
+<td>Return values that eliminate fewer distinct remaining neighbor values first. Use ascending value order for ties. Do not mutate the input domains.</td>
+</tr>
+<tr>
+<td>forward_checking(problem, variable, value, domains)</td>
+<td>Filter each direct unassigned neighbor using all applicable constraints. Complete those updates even after a wipeout, then report whether any domain is empty. Do not propagate between two unassigned variables.</td>
+</tr>
+<tr>
+<td>solve(problem)</td>
+<td>Use the four helpers, check consistency with assigned neighbors, backtrack, and restore branch-local state. Return a complete assignment, or None if no solution exists.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>MRV picks a variable. LCV (least constraining value) orders that variable's values.</strong> For LCV, count a particular neighbor value once even if multiple constraints reject it. All values are hashable and orderable within their own domain.</p>
+<p>The <strong>domains</strong> argument in MRV, LCV, and forward checking contains <strong>only currently unassigned variables</strong>. A missing key means assigned; a present key with an empty set means unassigned with zero choices. For example, with <code>{&quot;Y&quot;: set(), &quot;Z&quot;: {1, 2}}</code>, MRV selects Y when called. In search, that branch cannot succeed.</p>
+<p>When trying X = 1, put X in the branch assignment and <strong>drop X from the branch domains before forward checking</strong>. Do not delete a neighbor's key when its domain becomes empty: the empty set shows why the branch failed. Discard or restore both branch changes before trying a sibling.</p>
+<p>For <strong>one_consistency</strong>, apply every unary rule and build a separate list of constraints to keep. Replace problem.constraints after the loop. Removing items from the list while iterating can skip the next rule.</p>
+<p>Use a copy or an undo mechanism for each branch. Unary preprocessing may mutate the working problem; the runner builds a fresh problem per solve. An empty CSP has solution <strong>{}</strong>. A CSP with a required variable that has no legal value is <strong>None</strong>. Do not treat an empty solution as failure.</p>
+<p>The app counts each call to a supplied constraint's yes/no function and each call that asks whether every variable is assigned. The counts help you compare the work each solver does. They do not affect your grade.</p>
+<h3 id="4-2-arc-consistency-ac-3">4.2: Arc consistency (AC-3)</h3>
+<p>Implement <strong>arc_consistency(problem)</strong> in <strong>solver.py</strong>. The unit tests call it directly with a binary CSP whose unary filtering has already been applied. Update <strong>problem.domains</strong> in place and keep the variable names and constraints. Return <strong>True</strong> once the domains are arc-consistent, or <strong>False</strong> if any domain is empty. An already empty domain also fails, even for a variable with no neighbors. You may stop as soon as a domain is empty.</p>
+<p>An arc <strong>X to Y</strong> asks whether every value still in X has a supporting value in Y. A single pair of values must satisfy <strong>all</strong> binary constraints between X and Y together, using each constraint's own endpoint order. For example, with X = Y, Y = Z, and Z restricted to {2}, pruning Y to {2} must also cause X to shrink to {2}.</p>
+<p>Start with both directions of every constrained pair. When pruning shrinks a domain, revisit incoming arcs whose supports may have changed. Any queue order is allowed. A nonempty fixed point means local consistency only. For example, a triangle with two colors is arc-consistent, even though it has no full coloring.</p>
+<p>Use <strong>Implement and test &gt; AC-3 unit checks</strong> or run <code>uv run --locked app.py check --case ac3-chain</code>. This exercise is graded through unit tests on the returned Boolean and the domains. <strong>Leave AC-3 out of solve and the timetable advisor.</strong></p>
+<h2 id="5-implement-the-advisor">5. Implement the advisor</h2>
+<p>Suppose your first timetable has tutorial T1, but you want T4. That first answer does not tell you whether T4 could work. In <strong>submission/advisor.py</strong>, you ask the existing solver to try the same courses with one extra restriction. The supplied <strong>answer_query</strong> already runs these steps in order:</p>
+<ol>
+<li><strong>Check the original request.</strong> The callback runs with no extra restrictions. Implement <strong>base_failure(base)</strong> to decide whether to stop.</li>
+<li><strong>Build the what-if restriction.</strong> Implement <strong>make_restrictions(catalogue, request, query)</strong> to return a dictionary of allowed section IDs. It does not call the solver.</li>
+<li><strong>Read the second result.</strong> Implement <strong>interpret_trial(kind, trial)</strong> to return the verdict and any witness. The starter calls it only after a feasible base.</li>
+</ol>
+<p>Start with <strong>advisor-restrictions</strong> and <strong>advisor-results</strong> in the public checks. They do not need your model, solver, or a working end-to-end query. Then run the individual query checks. The app handles the base-schedule menu action separately.</p>
+<p>The supplied Query has <code>kind: str</code> and three optional string fields. Here is what each action sends:</p>
+<table>
+<thead>
+<tr>
+<th>kind</th>
+<th>component</th>
+<th>section</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>take</td>
+<td>Component ID</td>
+<td>Section ID</td>
+<td>None</td>
+</tr>
+<tr>
+<td>unavoidable</td>
+<td>Component ID</td>
+<td>Section ID</td>
+<td>None</td>
+</tr>
+<tr>
+<td>avoid-day</td>
+<td>None</td>
+<td>None</td>
+<td>Day label, e.g. Tue</td>
+</tr>
+<tr>
+<td>schedule (app only)</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>Do not access catalogue.sections[query.component] for avoid-day: there is no single component to look up. A day restriction applies to every requested component.</p>
+<p>The runner validates the query and supplies <strong>solve_request(restrictions)</strong>. This function builds and solves a <strong>fresh</strong> CSP on every call. A restriction maps a component ID to the section IDs it is still allowed to use. It intersects those IDs with the domain, without bypassing time, link, or availability rules.</p>
+<pre><code class="language-python">base = solve_request({})
+trial = solve_request({&quot;CMPS402.tutorial&quot;: {&quot;T4&quot;}})
+</code></pre>
+<p>The first call tests the unchanged request. If CMPS402 is requested, the second keeps only T4 for its tutorial; all other components retain their choices. An omitted key leaves a domain alone. A key with an empty set leaves that component with no legal choices. The callback returns <strong>SolveResult(status, schedule)</strong>; only SAT carries a schedule, which can be {}.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>What to ask the solver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Take this section?</td>
+<td>Keep just that section in its component's domain.</td>
+</tr>
+<tr>
+<td>Avoid this day?</td>
+<td>Keep the sections on other days in each requested component's domain.</td>
+</tr>
+<tr>
+<td>Is this section unavoidable?</td>
+<td>Try to avoid it: keep all other section IDs in its component's domain.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="read-the-status-not-the-timetable">Read the status, not the timetable</h3>
+<p>In <strong>base_failure</strong>, SAT means return None and continue. UNSAT means stop with BASE_INFEASIBLE; LIMIT means stop with INCONCLUSIVE. Check the status directly: an empty SAT schedule is not a failure.</p>
+<table>
+<thead>
+<tr>
+<th>Trial status</th>
+<th>Take or avoid-day</th>
+<th>Unavoidable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAT</td>
+<td>POSSIBLE with the trial schedule</td>
+<td>NOT_UNAVOIDABLE with the trial schedule</td>
+</tr>
+<tr>
+<td>UNSAT</td>
+<td>IMPOSSIBLE</td>
+<td>UNAVOIDABLE</td>
+</tr>
+<tr>
+<td>LIMIT</td>
+<td>INCONCLUSIVE</td>
+<td>INCONCLUSIVE</td>
+</tr>
+</tbody>
+</table>
+<p>Return an <strong>Advice</strong> using the supplied Verdict enum. For example, a successful take trial becomes <code>Advice(Verdict.POSSIBLE, trial.schedule)</code>. A limit becomes <code>Advice(Verdict.INCONCLUSIVE)</code>, with no schedule. Only a SAT trial supplies a witness; never attach the base schedule in its place. The runner handles process errors and time limits.</p>
+<h3 id="walk-through-the-unavoidable-question">Walk through the unavoidable question</h3>
+<p>In the <strong>forced</strong> request, Thursday morning is blocked. MTHS102 must use its Monday L1 and linked T1. Monday math clashes with CMPS402 L1, so the base works only with CMPS402 L2. First confirm the base returns SAT. Now <strong>ban L2</strong> by keeping only the other allowed lecture IDs. If this second solve returns UNSAT, there is no timetable without L2, so L2 is unavoidable. If it returns SAT instead, return its timetable as the counterexample. Merely seeing L2 in the first timetable is not proof.</p>
+<p>In the <strong>blocked</strong> request, Tuesday morning is also blocked and the base fails. Stop at <strong>BASE INFEASIBLE</strong>, not UNAVOIDABLE. Each question is hypothetical: do not change the saved request or reuse another question's restricted domains. No enumeration of every timetable is required.</p>
+<h2 id="6-run-check-and-investigate">6. Run, check, and investigate</h2>
+<pre><code class="language-text">uv run --locked app.py demo
+uv run --locked app.py walkthrough
+uv run --locked app.py check
+uv run --locked app.py check --case unavoidable
+uv run --locked app.py run --case week
+uv run --locked app.py run --case alternatives --kind avoid-day --day Tue
+uv run --locked app.py run --case forced --kind unavoidable --component CMPS402.lecture --section L2
+uv run --locked app.py --help
+</code></pre>
+<p><strong>Try your advisor</strong> starts on <strong>alternatives</strong>, a six-course timetable. Find a schedule, then try taking CMPS402 T4 or keeping Tuesday free. <strong>single-course</strong> is the small CMPS402 debugging example. <strong>forced</strong> demonstrates an unavoidable lecture; <strong>blocked</strong> has no base solution.</p>
+<p>A timeout is <strong>inconclusive</strong>, not proof that no schedule exists. Runs and public checks use a 5-second default. For debugging, <code>run --timeout SECONDS</code> changes only your local run. Use public checks to compare your implementation with the supplied examples. Staff checks independently verify schedules and cover additional instances using the same rules.</p>
+<p>In the walkthrough, <strong>single-course</strong> shows the extra checks spent on ordering and pruning a small request. <strong>Packed</strong> shows how that work pays off on an infeasible six-course request: pruning cuts down the number of search states the solver enters. The app records the counts automatically. Submit your Python code only.</p>
+<h2 id="7-assessment-and-discussion">7. Assessment and discussion</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th style="text-align:right">Marks</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shared model</td>
+<td style="text-align:right">1.00</td>
+<td>Requested variables, domains, time rules, unary restrictions, links</td>
+</tr>
+<tr>
+<td>Shared solver</td>
+<td style="text-align:right">2.00</td>
+<td>Backtracking solver and helpers (1.50) and standalone AC-3 unit checks (0.50)</td>
+</tr>
+<tr>
+<td>Shared advisor</td>
+<td style="text-align:right">1.00</td>
+<td>Correct restrictions, witnesses, necessity, base/limit handling, query isolation</td>
+</tr>
+<tr>
+<td>Individual explanation</td>
+<td style="text-align:right">2.00</td>
+<td>Explain your actual model, solver, and advisor decisions</td>
+</tr>
+<tr>
+<td>Individual application</td>
+<td style="text-align:right">2.00</td>
+<td>Apply the concepts to an unfamiliar advisor/modeling case and solver case</td>
+</tr>
+</tbody>
+</table>
+<p>Each student is assessed individually in discussion. No written answer file, report, video, or prepared discussion file is submitted.</p>
+<h2 id="8-submit">8. Submit</h2>
+<ol>
+<li>Finish the required Python files in <strong>submission/</strong>. Keep Python helpers in that folder and use relative imports for them.</li>
+<li>Choose <strong>Submit &gt; Enter member details</strong>, then <strong>One member</strong> or <strong>Two members</strong>. Enter the full name and ID of each member. For the command-line workflow, you can enter the same details in the literal MEMBERS list in <strong>submission/student_info.py</strong>.</li>
+<li>Re-run the public checks.</li>
+<li>Choose <strong>Submit &gt; Build the Python-only ZIP</strong>, or run <strong>uv run --locked app.py submit</strong>.</li>
+<li>Open the generated ZIP under <strong>output/submissions/</strong>. Check the name and ID in <strong>Name_ID.zip</strong> for one member, or both names and IDs in <strong>Name1_ID1__Name2_ID2.zip</strong> for two. Confirm that the archive contains only Python files under submission/.</li>
+<li>Upload one ZIP to the location listed in the course announcement before the deadline. For a pair, only one member uploads it. Check that the submission is confirmed and keep a copy of the uploaded ZIP.</li>
+</ol>
+<p>Plagiarism and cheating are prohibited. Do not copy or share solutions across submissions. Each student must understand and be able to explain the submitted work.</p>
+</main></div></body></html>

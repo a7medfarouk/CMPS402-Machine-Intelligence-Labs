@@ -1,0 +1,330 @@
+{
+  "queries": [
+    {
+      "case": "alternatives",
+      "title": "Start with a six-course timetable",
+      "reason": "This timetable covers all 12 components, including both linked math courses. It is one witness, not proof that its particular sections are required.",
+      "query": {
+        "kind": "schedule",
+        "component": null,
+        "section": null,
+        "day": null
+      },
+      "result": {
+        "status": "SCHEDULE FOUND",
+        "schedule": {
+          "CMPS402.lecture": "L1",
+          "MTHS102.lecture": "L2",
+          "CMPS202.tutorial": "T1",
+          "EECS102.lecture": "L2",
+          "CMPS303.lecture": "L1",
+          "MTHS102.tutorial": "T2",
+          "MTHS104.tutorial": "T1",
+          "MTHS104.lecture": "L1",
+          "CMPS202.lecture": "L2",
+          "CMPS303.tutorial": "T1",
+          "CMPS402.tutorial": "T1",
+          "EECS102.tutorial": "T2"
+        }
+      },
+      "restrictions": [
+        {}
+      ]
+    },
+    {
+      "case": "alternatives",
+      "title": "Can I switch to CMPS402 tutorial T4?",
+      "reason": "In the timetable below, CMPS402 T4 moves the tutorial to Thursday, 13:00\u201314:30. CMPS402 L1 still fits because its lecture and tutorial are unlinked.",
+      "query": {
+        "kind": "take",
+        "component": "CMPS402.tutorial",
+        "section": "T4",
+        "day": null
+      },
+      "result": {
+        "status": "POSSIBLE",
+        "schedule": {
+          "CMPS402.tutorial": "T4",
+          "CMPS303.tutorial": "T1",
+          "MTHS104.lecture": "L1",
+          "CMPS202.lecture": "L2",
+          "MTHS102.lecture": "L2",
+          "CMPS202.tutorial": "T1",
+          "EECS102.lecture": "L2",
+          "CMPS303.lecture": "L1",
+          "MTHS102.tutorial": "T2",
+          "MTHS104.tutorial": "T1",
+          "CMPS402.lecture": "L1",
+          "EECS102.tutorial": "T2"
+        }
+      },
+      "restrictions": [
+        {},
+        {
+          "CMPS402.tutorial": [
+            "T4"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "alternatives",
+      "title": "Can I keep Tuesday free?",
+      "reason": "Look for the empty Tuesday column. EECS102 moves its tutorial to Monday and CMPS303 moves its tutorial to Thursday. All six courses still fit.",
+      "query": {
+        "kind": "avoid-day",
+        "component": null,
+        "section": null,
+        "day": "Tue"
+      },
+      "result": {
+        "status": "POSSIBLE",
+        "schedule": {
+          "CMPS402.lecture": "L1",
+          "CMPS303.tutorial": "T2",
+          "MTHS102.lecture": "L2",
+          "CMPS202.tutorial": "T1",
+          "EECS102.lecture": "L2",
+          "CMPS303.lecture": "L1",
+          "EECS102.tutorial": "T3",
+          "MTHS102.tutorial": "T2",
+          "CMPS402.tutorial": "T1",
+          "MTHS104.lecture": "L1",
+          "CMPS202.lecture": "L2",
+          "MTHS104.tutorial": "T1"
+        }
+      },
+      "restrictions": [
+        {},
+        {
+          "CMPS402.lecture": [
+            "L1"
+          ],
+          "CMPS402.tutorial": [
+            "T1",
+            "T2",
+            "T4"
+          ],
+          "CMPS202.lecture": [
+            "L1",
+            "L2"
+          ],
+          "CMPS202.tutorial": [
+            "T1",
+            "T2"
+          ],
+          "CMPS303.lecture": [
+            "L1",
+            "L2"
+          ],
+          "CMPS303.tutorial": [
+            "T2"
+          ],
+          "EECS102.lecture": [
+            "L1",
+            "L2"
+          ],
+          "EECS102.tutorial": [
+            "T1",
+            "T3"
+          ],
+          "MTHS102.lecture": [
+            "L1",
+            "L2"
+          ],
+          "MTHS102.tutorial": [
+            "T1",
+            "T2"
+          ],
+          "MTHS104.lecture": [
+            "L1"
+          ],
+          "MTHS104.tutorial": [
+            "T1",
+            "T2"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "linked",
+      "title": "What happens when I choose a linked math tutorial?",
+      "reason": "Keeping T2 also requires L2 because the explicit allowed pairs are (T1, L1) and (T2, L2), in tutorial-first order.",
+      "query": {
+        "kind": "take",
+        "component": "MTHS102.tutorial",
+        "section": "T2",
+        "day": null
+      },
+      "result": {
+        "status": "POSSIBLE",
+        "schedule": {
+          "MTHS102.tutorial": "T2",
+          "MTHS102.lecture": "L2"
+        }
+      },
+      "restrictions": [
+        {},
+        {
+          "MTHS102.tutorial": [
+            "T2"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "alternatives",
+      "title": "When can I avoid CMPS402 lecture L2?",
+      "reason": "Ban L2. A timetable using L1 still works for all six courses, so L2 is not necessary. The returned timetable is the counterexample.",
+      "query": {
+        "kind": "unavoidable",
+        "component": "CMPS402.lecture",
+        "section": "L2",
+        "day": null
+      },
+      "result": {
+        "status": "NOT UNAVOIDABLE",
+        "schedule": {
+          "CMPS402.lecture": "L1",
+          "MTHS102.lecture": "L2",
+          "CMPS202.tutorial": "T1",
+          "EECS102.lecture": "L2",
+          "CMPS303.lecture": "L1",
+          "MTHS102.tutorial": "T2",
+          "MTHS104.tutorial": "T1",
+          "MTHS104.lecture": "L1",
+          "CMPS202.lecture": "L2",
+          "CMPS303.tutorial": "T1",
+          "CMPS402.tutorial": "T1",
+          "EECS102.tutorial": "T2"
+        }
+      },
+      "restrictions": [
+        {},
+        {
+          "CMPS402.lecture": [
+            "L1"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "forced",
+      "title": "Can I take L1 with Thursday morning blocked?",
+      "reason": "The base works with CMPS402 L2. If you insist on L1, it overlaps MTHS102 L1 on Monday, and the Thursday math lecture is blocked. The extra choice fails even though the base works.",
+      "query": {
+        "kind": "take",
+        "component": "CMPS402.lecture",
+        "section": "L1",
+        "day": null
+      },
+      "result": {
+        "status": "IMPOSSIBLE",
+        "schedule": null
+      },
+      "restrictions": [
+        {},
+        {
+          "CMPS402.lecture": [
+            "L1"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "forced",
+      "title": "When is CMPS402 lecture L2 unavoidable?",
+      "reason": "Thursday is blocked for MTHS102 L2, so math must use its Monday L1 and linked T1. Monday math clashes with CMPS402 L1. The base works with CMPS402 L2, but banning L2 leaves no schedule.",
+      "query": {
+        "kind": "unavoidable",
+        "component": "CMPS402.lecture",
+        "section": "L2",
+        "day": null
+      },
+      "result": {
+        "status": "UNAVOIDABLE",
+        "schedule": null
+      },
+      "restrictions": [
+        {},
+        {
+          "CMPS402.lecture": [
+            "L1"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "blocked",
+      "title": "What if the original request already fails?",
+      "reason": "This request also blocks Tuesday morning, the remaining CMPS402 lecture. The base is already infeasible, so there is no claim that L2 is unavoidable.",
+      "query": {
+        "kind": "unavoidable",
+        "component": "CMPS402.lecture",
+        "section": "L2",
+        "day": null
+      },
+      "result": {
+        "status": "BASE INFEASIBLE",
+        "schedule": null
+      },
+      "restrictions": [
+        {}
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "case": "single-course",
+      "result": "SCHEDULE FOUND",
+      "note": "Plain backtracking reaches a valid timetable without exploring much. LCV and forward checking inspect remaining choices along the way, so the enhanced solver makes more rule checks while entering the same number of search states.",
+      "rows": [
+        {
+          "name": "Plain backtracking",
+          "constraint_checks": 8,
+          "completion_checks": 3
+        },
+        {
+          "name": "MRV + LCV + forward checking",
+          "constraint_checks": 20,
+          "completion_checks": 3
+        }
+      ],
+      "components": [
+        "CMPS402.lecture",
+        "CMPS402.tutorial"
+      ]
+    },
+    {
+      "case": "packed",
+      "result": "BASE INFEASIBLE",
+      "note": "The request blocks Sunday from 14:45 to 15:00, cutting off some section choices. Forward checking can abandon a branch as soon as a remaining component loses all its choices. Here the enhanced solver enters fewer states and tests far fewer rules overall.",
+      "rows": [
+        {
+          "name": "Plain backtracking",
+          "constraint_checks": 1459,
+          "completion_checks": 200
+        },
+        {
+          "name": "MRV + LCV + forward checking",
+          "constraint_checks": 193,
+          "completion_checks": 4
+        }
+      ],
+      "components": [
+        "CMPS402.lecture",
+        "CMPS402.tutorial",
+        "CMPS202.lecture",
+        "CMPS202.tutorial",
+        "CMPS303.lecture",
+        "CMPS303.tutorial",
+        "EECS102.lecture",
+        "EECS102.tutorial",
+        "MTHS102.lecture",
+        "MTHS102.tutorial",
+        "MTHS104.lecture",
+        "MTHS104.tutorial"
+      ]
+    }
+  ]
+}
