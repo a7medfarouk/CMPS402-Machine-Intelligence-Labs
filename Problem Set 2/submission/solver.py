@@ -15,7 +15,7 @@ from scheduler.contracts import BinaryConstraint, Problem, UnaryConstraint
 # A missing key means assigned. A present key with set() means unassigned with no choices.
 
 
-def one_consistency(problem: Problem):
+def one_consistency(problem: Problem) -> bool:
     """Filter unary domains, remove unary constraints and return whether all domains survive."""
     retained_constraints: List = []
     for constraint in problem.constraints:
@@ -69,20 +69,53 @@ def least_constraining_values(problem: Problem, variable: str, domains: Dict[str
     return [value for value,_ in lcv_order]
 
 
-def forward_checking(problem, assigned_variable, assigned_value, domains):
+def forward_checking(problem: Problem, assigned_variable: str, assigned_value: str, domains: Dict[str, Set]) -> bool:
     """Filter all direct unassigned neighbors and report whether domains survive."""
     # assigned_variable has already been removed from domains. Apply all relevant
     # predicates for each neighbor. Keep size-zero entries; do not propagate from neighbors.
-    raise NotImplementedError("Implement forward checking.")
+    for constraint in problem.constraints:
+        if isinstance(constraint, BinaryConstraint) and assigned_variable in constraint.variables:
+            neighbor: str = constraint.get_other(assigned_variable)
+            if neighbor in domains:
+                for neighbor_value in domains[neighbor].copy():
+                    if not constraint.is_satisfied({assigned_variable: assigned_value, neighbor: neighbor_value}):
+                        domains[neighbor].remove(neighbor_value)             
+    return all(domains[variable] for variable in domains)
 
 
-def solve(problem):
+def solve_recursively(problem: Problem, assignment: dict[str, str], domains: Dict[str, Set]):
+    if problem.is_complete(assignment):
+        if problem.satisfies_constraints(assignment):
+            return assignment
+    variable = minimum_remaining_values(problem, domains)
+    values = least_constraining_values(problem, variable, domains)
+    for value in values:
+        new_assignment = assignment.copy()
+        new_domains = {variable: domain.copy() for variable, domain in domains.items()}
+        new_assignment[variable] = value
+        new_domains.pop(variable, None)
+        if not forward_checking(problem, variable, value, new_domains):
+            continue
+        else:
+            result = solve_recursively(problem, new_assignment, new_domains)
+        if result is not None:
+            return result
+    return None  
+    
+
+def solve(problem: Problem) -> Dict[str, str] | None:
     """Use the four helpers; return a valid complete assignment or None."""
     # Before forward checking, add the value to the branch assignment and remove
     # that variable from the branch domains. Failed branches must not affect siblings.
     # {} is a valid solution to a problem with no variables, not a failure signal.
-    raise NotImplementedError("Implement backtracking with the required helpers.")
-
+    if len(problem.variables) == 0:
+        return {}
+    if not one_consistency(problem):
+        return None
+                    
+    assignment: dict[str, str] = {}    
+    domains = {variable: domain.copy() for variable, domain in problem.domains.items()}      
+    return solve_recursively(problem, assignment, domains)
 
 def arc_consistency(problem):
     """Run AC-3 on a binary CSP after unary filtering and report whether all domains survive."""
