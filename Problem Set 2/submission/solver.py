@@ -1,6 +1,6 @@
 """Implement the generic CSP algorithms, without inspecting timetable records."""
 
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Tuple
 
 from scheduler.contracts import BinaryConstraint, Problem, UnaryConstraint
 
@@ -45,10 +45,28 @@ def minimum_remaining_values(problem: Problem, domains: Dict[str, Set]) -> str:
     return min_domain_variable
 
 
-def least_constraining_values(problem, variable, domains):
+def least_constraining_values(problem: Problem, variable: str, domains: Dict[str, Set]) -> List:
     """Order values by distinct neighbor values removed; break ties by ascending value."""
     # LCV only scores the choices; it must not change the supplied domains.
-    raise NotImplementedError("Implement LCV.")
+    lcv_order: list[tuple[str, int]] = []
+    for value in domains[variable]:
+        order: int = 0
+        for constraint in problem.constraints:
+            if isinstance(constraint, BinaryConstraint) and variable in constraint.variables:
+                neighbor: str = constraint.get_other(variable)
+                if neighbor in domains:
+                    for neighbor_value in domains[neighbor]:
+                        valid: bool = True
+                        for constr in problem.constraints:
+                            if isinstance(constr, BinaryConstraint) and variable in constr.variables and neighbor in constr.variables:
+                                if not constr.is_satisfied({variable: value, neighbor: neighbor_value}):
+                                    valid = False
+                                    break
+                        if valid:
+                            order += 1
+        lcv_order.append((value, order))
+    lcv_order.sort(key= lambda pair: (-pair[1],pair[0]))           
+    return [value for value,_ in lcv_order]
 
 
 def forward_checking(problem, assigned_variable, assigned_value, domains):
