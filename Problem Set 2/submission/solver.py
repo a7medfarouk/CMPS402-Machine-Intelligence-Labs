@@ -1,6 +1,8 @@
 """Implement the generic CSP algorithms, without inspecting timetable records."""
 
-from scheduler.contracts import BinaryConstraint, UnaryConstraint
+from typing import Dict, List, Set
+
+from scheduler.contracts import BinaryConstraint, Problem, UnaryConstraint
 
 # scheduler/contracts.py supplies Problem.variables, .domains and .constraints.
 # problem.is_complete(assignment) checks for all variables; it does NOT check validity.
@@ -13,15 +15,34 @@ from scheduler.contracts import BinaryConstraint, UnaryConstraint
 # A missing key means assigned. A present key with set() means unassigned with no choices.
 
 
-def one_consistency(problem):
+def one_consistency(problem: Problem):
     """Filter unary domains, remove unary constraints and return whether all domains survive."""
-    # Build the retained constraint list separately; do not delete items during iteration.
-    raise NotImplementedError("Implement node consistency.")
+    retained_constraints: List = []
+    for constraint in problem.constraints:
+        if isinstance(constraint, BinaryConstraint):
+            retained_constraints.append(constraint)
+        elif isinstance(constraint, UnaryConstraint):
+            domain = problem.domains[constraint.variable]
+            for value in domain.copy():
+                if not constraint.is_satisfied({constraint.variable: value}):
+                    domain.remove(value)
+    problem.constraints = retained_constraints     
+    return all(problem.domains[variable] for variable in problem.variables)
 
-
-def minimum_remaining_values(problem, domains):
+def minimum_remaining_values(problem: Problem, domains: Dict[str, Set]) -> str:
     """Choose the smallest current domain, including size zero; use declared order for ties."""
-    raise NotImplementedError("Implement MRV.")
+    for variable in problem.variables:
+        if variable not in domains:
+            continue
+        else:
+            min_domain_variable: str = variable
+            break
+    for variable in problem.variables:
+        if variable not in domains:
+            continue     
+        if len(domains[variable]) < len(domains[min_domain_variable]):
+            min_domain_variable = variable
+    return min_domain_variable
 
 
 def least_constraining_values(problem, variable, domains):
