@@ -1,10 +1,54 @@
 """Implement generic search using the game interface in Instructions.md."""
 
+def minvalue(game, state, evaluate, depth, max_player = 0):
+    """runs on the opponents turn and returns a utility value"""
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player]
+    elif depth == 0:
+        return evaluate(game, state, max_player)
+    v = float("inf")
+    for action in game.get_actions(state):
+        v = min(v, maxvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player))
+    return v
 
-def minimax(game, state, evaluate, depth, max_player=0):
+
+def maxvalue(game, state, evaluate, depth, max_player = 0):
+    """runs on players turn and returns a utility value"""
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player]
+    elif depth == 0:
+        return evaluate(game, state, max_player)
+    v = float("-inf")
+    for action in game.get_actions(state):
+        v = max(v, minvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player))
+    return v
+    
+
+def minimax(game, state, evaluate, depth, max_player = 0):
     """Return (value, action) at a fixed depth from max_player's perspective."""
     # Ask the game whose turn it is. Check terminal utility before the cutoff.
-    raise NotImplementedError("Implement depth-limited minimax.")
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player], None
+    if depth == 0:
+        return evaluate(game, state, max_player), None
+    turn = game.get_turn(state)
+    action_values = []
+    for action in game.get_actions(state):
+        if turn == max_player:
+            value = minvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player)
+        else:
+            value = maxvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player)
+        action_values.append(value)
+    if turn == max_player:
+        value = max(action_values)
+        action_index = action_values.index(value)
+        action = game.get_actions(state)[action_index]
+        return (value, action)
+    else:
+        value = min(action_values)
+        action_index = action_values.index(value)
+        action = game.get_actions(state)[action_index]
+        return (value, action)
 
 
 def alphabeta(game, state, evaluate, depth, max_player=0, *, ordered=False):
