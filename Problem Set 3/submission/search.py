@@ -147,11 +147,54 @@ def order_moves(game, state, evaluate, max_player=0):
     else:
         return sorted(actions, key= get_scores)
 
+def ex_avgvalue(game, state, evaluate, depth, max_player = 0):
+    """runs on the opponents turn and returns a utility value"""
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player]
+    elif depth == 0:
+        return evaluate(game, state, max_player)
+    v = float("inf")
+    values = []
+    for action in game.get_actions(state):
+        v = ex_maxvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player)
+        values.append(v)
+    avgv = sum(values)/len(values)
+    return avgv
+
+def ex_maxvalue(game, state, evaluate, depth, max_player = 0):
+    """runs on players turn and returns a utility value"""
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player]
+    elif depth == 0:
+        return evaluate(game, state, max_player)
+    v = float("-inf")
+    for action in game.get_actions(state):
+        v = max(v, ex_avgvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player))
+    return v
 
 def expectimax(game, state, evaluate, depth, max_player=0):
     """Return (value, action) for a MAX decision and uniformly random opposition."""
     # Unit tests call this function on tree fixtures. A chance root has no action.
-    raise NotImplementedError("Implement standalone expectimax.")
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player], None
+    if depth == 0:
+        return evaluate(game, state, max_player), None
+    turn = game.get_turn(state)
+    action_values = []
+    for action in game.get_actions(state):
+        if turn == max_player:
+            value = ex_avgvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player)
+        else:
+            value = ex_maxvalue(game, game.get_successor(state, action), evaluate, depth - 1, max_player)
+        action_values.append(value)
+    if turn == max_player:
+        value = max(action_values)
+        action_index = action_values.index(value)
+        action = game.get_actions(state)[action_index]
+        return (value, action)
+    else:
+        value = sum(action_values)/len(action_values)
+        return (value, None)
 
 
 def solve_chomp_endgame(game, state, max_player=0):
