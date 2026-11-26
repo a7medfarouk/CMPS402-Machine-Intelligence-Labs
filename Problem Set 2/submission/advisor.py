@@ -1,6 +1,7 @@
 """Answer one what-if question using the supplied feasibility callback."""
 
-from scheduler.contracts import Advice, SolveStatus, Verdict
+from scheduler.contracts import Advice, SolveStatus, Verdict, SolveResult
+from scheduler.catalogue import Catalogue, Request, Query
 
 # scheduler/catalogue.py defines Query(kind, component, section, day).
 # For "take" and "unavoidable", component and section are string IDs; day is None.
@@ -15,22 +16,57 @@ from scheduler.contracts import Advice, SolveStatus, Verdict
 # Return Advice(Verdict.MEMBER, witness) or Advice(Verdict.MEMBER) without a witness.
 
 
-def make_restrictions(catalogue, request, query):
+def make_restrictions(catalogue: Catalogue, request: Request, query: Query):
     """Translate the question into allowed section IDs. Do not call the solver here."""
     # For an unavoidable question, test whether the named section can be avoided.
-    raise NotImplementedError("Build the allowed-ID sets for each question.")
+    if query.kind == "take":
+        return {query.component: {query.section}}
+
+    if query.kind == "unavoidable":
+        return {
+            query.component: {
+                section.identifier
+                for section in catalogue.sections[query.component]
+                if section.identifier != query.section
+            }
+        }
+
+    if query.kind == "avoid-day":
+        restrictions = {}
+        for component in request.components:
+            restrictions[component] = {
+                section.identifier
+                for section in catalogue.sections[component]
+                if section.meeting.day != query.day
+            }
+        return restrictions
 
 
-def base_failure(base):
+def base_failure(base: SolveResult):
     """Return an Advice if the base prevents a trial, otherwise return None."""
-    # Check base.status, not whether base.schedule is truthy: {} can be a valid witness.
-    raise NotImplementedError("Decide whether the unchanged request permits a trial.")
+    # Check base.status, not whether base.schedule is truthy: {} can be a valid
+    #  witness.
+    if base.status == SolveStatus.UNSAT:
+        return Advice(Verdict.BASE_INFEASIBLE)
+    if base.status == SolveStatus.LIMIT:
+        return Advice(Verdict.INCONCLUSIVE)
+    return None
 
 
-def interpret_trial(kind, trial):
+def interpret_trial(kind: str, trial: SolveResult):
     """Turn the restricted solve into Advice; called only after a feasible base."""
     # For necessity, a successful trial is a counterexample, not proof of necessity.
-    raise NotImplementedError("Translate the trial status into the appropriate verdict.")
+    if trial.status == SolveStatus.LIMIT:
+        return Advice(Verdict.INCONCLUSIVE)
+
+    if kind == "unavoidable":
+        if trial.status == SolveStatus.SAT:
+            return Advice(Verdict.NOT_UNAVOIDABLE, trial.schedule)
+        return Advice(Verdict.UNAVOIDABLE) 
+
+    if trial.status == SolveStatus.SAT:
+        return Advice(Verdict.POSSIBLE, trial.schedule)
+    return Advice(Verdict.IMPOSSIBLE) 
 
 
 def answer_query(catalogue, request, query, solve_request):
