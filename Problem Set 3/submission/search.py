@@ -50,17 +50,102 @@ def minimax(game, state, evaluate, depth, max_player = 0):
         action = game.get_actions(state)[action_index]
         return (value, action)
 
+def ab_minvalue(game, state, evaluate, depth, alpha, beta, max_player = 0, *, ordered = False):
+    """runs on the opponents turn and returns a utility value"""
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player]
+    elif depth == 0:
+        return evaluate(game, state, max_player)
+    if ordered:
+        actions = order_moves(game, state, evaluate, max_player)
+    else:
+        actions = game.get_actions(state)
+    v = float("inf")
+    
+    for action in actions:
+        v = min(v, ab_maxvalue(game, game.get_successor(state, action), evaluate, depth - 1, alpha, beta, max_player, ordered=ordered))
+        if v <= alpha:
+            return v
+        beta = min(beta, v)
+    return v
+
+def ab_maxvalue(game, state, evaluate, depth, alpha, beta, max_player = 0, *, ordered= False):
+    """runs on players turn and returns a utility value"""
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player]
+    elif depth == 0:
+        return evaluate(game, state, max_player)
+    if ordered:
+        actions = order_moves(game, state, evaluate, max_player)
+    else:
+        actions = game.get_actions(state)
+    v = float("-inf")
+    for action in actions:
+        v = max(v, ab_minvalue(game, game.get_successor(state, action), evaluate, depth - 1, alpha, beta, max_player, ordered=ordered))
+        if v >= beta:
+            return v
+        alpha = max(alpha, v)
+    return v
 
 def alphabeta(game, state, evaluate, depth, max_player=0, *, ordered=False):
     """Return (value, action); use order_moves when ordered and more than one move remains."""
     # A pruned child's returned bound need not equal its exact minimax value.
-    raise NotImplementedError("Implement alpha-beta pruning.")
+    if game.is_terminal(state)[0]:
+        return game.is_terminal(state)[1][max_player], None
+    if depth == 0:
+        return evaluate(game, state, max_player), None
+    if ordered:
+        actions = order_moves(game, state, evaluate, max_player)
+    else:
+        actions = game.get_actions(state)
+    turn = game.get_turn(state)
+    action_values = []
+    alpha = float("-inf")
+    beta = float("inf")
+    for action in actions:
+        if turn == max_player:
+            value = ab_minvalue(game, game.get_successor(state, action), evaluate, depth - 1, alpha, beta, max_player, ordered=ordered)
+        else:
+            value = ab_maxvalue(game, game.get_successor(state, action), evaluate, depth - 1, alpha, beta, max_player, ordered=ordered)
+        action_values.append(value)
+        if turn == max_player:
+            alpha = max(alpha, value)
+        else:
+            beta = min(beta, value)
+
+
+    if turn == max_player:
+        value = max(action_values)
+        action_index = action_values.index(value)
+        action = actions[action_index]
+        return (value, action)
+    else:
+        value = min(action_values)
+        action_index = action_values.index(value)
+        action = actions[action_index]
+        return (value, action)
 
 
 def order_moves(game, state, evaluate, max_player=0):
     """Return a list or tuple of legal actions by successor score, with stable ties."""
     # Score terminal successors by utility. At a MIN node, lower scores go first.
-    raise NotImplementedError("Implement evaluator-based move ordering.")
+    scores = {}
+    actions = game.get_actions(state)
+    turn = game.get_turn(state)
+    def get_scores(action):
+        return scores[action]
+    
+    for action in actions:
+        end, utility = game.is_terminal(game.get_successor(state, action))
+        if end:
+            value = utility[max_player]
+        else:
+            value = evaluate(game, game.get_successor(state, action), max_player)
+        scores[action] = value
+    if turn == max_player:
+        return sorted(actions, key= get_scores, reverse= True)
+    else:
+        return sorted(actions, key= get_scores)
 
 
 def expectimax(game, state, evaluate, depth, max_player=0):
